@@ -1,0 +1,123 @@
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import Social from './social';
+import or from '../../assets/images/or.svg'
+import '../../App.css'
+import Copy from './copy';
+// import logo from '../../assets/images/logo.png'
+
+
+
+function Register() {
+    // State to store form input values
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
+
+    // State to handle registration status
+    const [registrationStatus, setRegistrationStatus] = useState('');
+
+    // Handle form input changes
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const navigate = useNavigate();
+
+    // Handle form submission
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Send registration data to the server (replace with your actual API endpoint)
+        try {
+            const response = await fetch('http://127.0.0.1:8000/auth/register/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                // Redirect to the activation page after a successful registration
+                navigate.push('/activation');
+                console.log(formData)
+            } else {
+                setRegistrationStatus('Registration failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setRegistrationStatus('Registration failed');
+        }
+    };
+
+
+    return (
+        <div>
+            <div className="ctn h-screen justify-center flex flex-col bg-gray-100">
+                <div className="from-wrapper w-full max-w-xl m-auto shadow-default bg-white rounded-lg border border-primary py-10 px-1">
+                    {/* <div className="logo-container">
+                        <img src={logo} alt="Logo" className="w-20 h-20" />
+                    </div> */}
+                    <div className="w-full max-w-sm m-auto">
+                        <div className="heading text-center">
+                            <h1 className='font-bold text-2xl'>Create Account</h1>
+                            <p className='text-gray-400'>Start your 30 day free trial. Cancel any time</p>
+                        </div>
+
+                        <div className="social-options">
+                            <Social msgG="Sign up with Google" msgF="Sign up with Facebook" />
+                        </div>
+
+                        <div className="or text-center">
+                            <img className='' src={or} alt="" />
+                        </div>
+                        <div className="form">
+                            <form onSubmit={handleSubmit}>
+                                <div>
+                                    <label htmlFor="email">Email:</label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="password">Password:</label>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        value={formData.password}
+                                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                                        onChange={handleInputChange}
+                                    />
+                                </div>
+                                <div className="form-btn flex items-center justify-center">
+                                    <button type="submit" className='bg-black text-white rounded-lg px-12 max-w-full my-5 py-2'>Create Account</button>
+                                </div>
+                                <p className='text-gray-400 text-center'>Already have an account? <Link to="/login" className='login'>Login</Link></p>
+                            </form>
+                        </div>
+                    </div>
+                    
+                </div>
+                <Copy/>
+            </div>
+
+
+
+
+
+
+            {registrationStatus && <p>{registrationStatus}</p>}
+        </div>
+    );
+}
+
+export default Register;
