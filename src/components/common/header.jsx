@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <>
         {/* Header */}
-      <header className="bg-white p-4 shadow-lg flex justify-between items-center">
+      <header className="bg-white p-4 hind shadow-lg flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
           <img src={logo} alt="Logo" className="w-100 h-11" />

@@ -14,6 +14,12 @@ module.exports = {
       screens: {
         "2xl": "1400px",
       },
+      extend: {
+        colors: {
+          badge: 'var(--badge)',
+          "text-badge": "var(--badge-text)",
+        }
+      }
     },
     extend: {
       keyframes: {

@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, redirect } from 'react-router-dom';
 import Social from './social';
 import or from '../../assets/images/or.svg'
 import '../../App.css'
 import Copy from './copy';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+
 // import logo from '../../assets/images/logo.png'
 
 
@@ -26,6 +28,8 @@ function Register() {
 
     const navigate = useNavigate();
 
+    const [normal, setNormal] = useState('default')
+
     // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -42,16 +46,29 @@ function Register() {
 
             if (response.ok) {
                 // Redirect to the activation page after a successful registration
-                navigate.push('/activation');
+                // const errorData = await response.json();
+                // setRegistrationStatus(errorData.message);
+                setNormal('default')
+
+                redirect('/activation');
+                setRegistrationStatus('Registration Successful');
                 console.log(formData)
+                
             } else {
-                setRegistrationStatus('Registration failed');
+                const errorData = await response.json();
+                setRegistrationStatus(errorData.message);
+                setNormal('destructive')
+                return redirect('/activation');
             }
         } catch (error) {
             console.error('Error:', error);
             setRegistrationStatus('Registration failed');
+            setNormal('destructive')
+            // return redirect('/activation');
         }
     };
+
+    
 
 
     return (
@@ -99,15 +116,22 @@ function Register() {
                                     />
                                 </div>
                                 <div className="form-btn flex items-center justify-center">
-                                    <button type="submit" className='bg-black text-white rounded-lg px-12 max-w-full my-5 py-2'>Create Account</button>
+                                    <button type="submit" className='bg-black w-full text-white rounded-lg px-12 max-w-full my-5 py-2'>Create Account</button>
                                 </div>
+                                
+                                    
+                                    {registrationStatus && <Alert variant={normal}>
+                                    <AlertTitle>Status:</AlertTitle>
+                                    <AlertDescription>{registrationStatus}</AlertDescription>
+                                        </Alert>}
+                                
                                 <p className='text-gray-400 text-center'>Already have an account? <Link to="/login" className='login'>Login</Link></p>
                             </form>
                         </div>
                     </div>
-                    
+
                 </div>
-                <Copy/>
+                <Copy />
             </div>
 
 
@@ -115,7 +139,7 @@ function Register() {
 
 
 
-            {registrationStatus && <p>{registrationStatus}</p>}
+
         </div>
     );
 }
