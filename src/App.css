@@ -61,6 +61,11 @@ body{
   height: 12vh;
 }
 
+.boxes{
+  box-shadow: 0 3px -35.16px #00000014;
+  background-color: white;
+}
+
 .wrapper{
   padding: 1rem 0;
   margin: 0 auto;
@@ -115,19 +120,20 @@ body{
   align-items: center;
   border-radius: 12px;
   margin-block: 1rem;
+  box-shadow: 2px 4px 6px 2px rgb(0 0 0 / 0.1), 2px 2px 4px 2px rgb(0 0 0 / 0.1);
 }
 
 .wrapper1 span{
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .wrapper1 p{
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .section{
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   align-items: center;
 }
 
@@ -158,7 +164,7 @@ body{
 
 .time{
   display: flex;
-  gap: 1rem;
+  gap: 0.7rem;
   align-items: center;
   
 }
@@ -169,4 +175,17 @@ body{
 
 .active{
 
+}
+.input-ctn label{
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.dummy-full{
+  width: 100%;
+  max-width: 450px;
+}
+
+.high button{
+  margin-top: 0.5rem;
 }

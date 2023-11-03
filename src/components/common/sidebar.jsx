@@ -15,7 +15,7 @@ const Sidebar = ({ customClass }) => {
     // }
 
     return (
-        <>
+        <div className="boxes">
             {/* Sidebar */}
             <div className={`${customClass}  bg-white text-gray-400 height p-4 margin`}>
                 <h1 className="text-2xl font-semibold">Sidebar</h1>
@@ -34,7 +34,7 @@ const Sidebar = ({ customClass }) => {
                     </NavLink>
                 </ul>
             </div>
-        </>
+        </div>
     )
 }
 
