@@ -4,10 +4,15 @@ import '../../App.css';
 import Copy from './copy';
 import Social from './social';
 // import logo from '../../assets/images/logo.png'
-
+import { useDispatch, useSelector } from 'react-redux';
+import { login  as authLogin} from '../utils/authSlicer';
+import { login } from '../utils/action';
 
 
 const Login = () => {
+    const {isAuthenticated, user} = useSelector(state=> state.auth)
+    const dispatch = useDispatch()
+    // console.log(isAuthenticated, user);
     // State to store form input values
     const [formData, setFormData] = useState({
         email: '',
@@ -27,30 +32,29 @@ const Login = () => {
         setShowPassword(!showPassword);
     };
 
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Send login data to the server (replace with your actual API endpoint)
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/login-token/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+            // const response = await fetch('http://127.0.0.1:8000/auth/login-token/', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(formData),
+            // });
 
-            if (response.ok) {
-                const userId = await response.json();
-                const store = userId.access_token
-                localStorage.setItem(store)
-                // signIn({
-                //     children,
-                //     token: store,
-                //     tokenType: "Bearer",
-                //     authState: {email: value.email}
+            const response = await login()
+            console.log(response)
 
-                // })
+            if (response) {
+                // const userDetails = await response.json();
+                console.log("FELIX")
+               dispatch(authLogin({payload:response}))
+
+
                 // Redirect to the dashboard or home page after successful login
                 // window.location.href = "/dashboard";
             } else {

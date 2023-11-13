@@ -23,21 +23,27 @@ export const register = async (email, password) => {
 };
 
 export const login = async (email, password) => {
-  const response = await axios.post("/api/login", {
-    email,
-    password,
-  });
+  // const response = await axios.post("/api/login", {
+  //   email ,
+  //   password,
+  // });
 
-  const token = response.token;
+  const response = {
+    token:"Bearer gfyuygdifygsyfgwygrfrhvyfirgyhsfgh",
+    user_id:12653765,
+  }
+
+  const token = response;
 
   // Save the token to local storage
-  localStorage.setItem("token", token);
+  localStorage.setItem("token", JSON.stringify(response));
 
   return {
     type: "LOGIN",
     payload: {
       email,
       token,
+      user_id: response.user_id
     },
   };
 };
