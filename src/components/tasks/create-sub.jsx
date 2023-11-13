@@ -9,6 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import UserSelect from "./create-combox";
+// import { ComboboxDemo } from "./create-combox";
 
 const CreateSub = () => {
   return (
@@ -102,13 +104,19 @@ const CreateSub = () => {
             </div>
           </div>
 
+          <div className="buttom">
+          <div className="select">
+            <UserSelect backendUrl="https://jsonplaceholder.typicode.com/users"/>
+            </div>
+          </div>
+
           <div className="buttom flex gap-10 py-7">.</div>
           <div className="buttons flex justify-end gap-6">
             <Button className="bg-[#036EFF] px-4 text-md">
               <Link to="/create">Create</Link>
             </Button>
             <Button className="bg-[#EEF4FB] text-[#036EFF] px-4 text-md">
-              <Link to="/create">Create</Link>
+              <Link to="/create">Delete</Link>
             </Button>
           </div>
         </div>

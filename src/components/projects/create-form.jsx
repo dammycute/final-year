@@ -74,12 +74,14 @@ const CreateForm = () => {
         </div>
         <div className="buttons flex justify-end gap-6">
         <Button className="bg-[#036EFF] px-4 text-md"><Link to="/create" >Create</Link></Button>
-        <Button className="bg-[#EEF4FB] text-[#036EFF] px-4 text-md"><Link to="/create" >Create</Link></Button>
+        <Button className="bg-[#EEF4FB] text-[#036EFF] px-4 text-md"><Link to="/create" >Delete</Link></Button>
         </div>
       </div>
       </div>
     </div>
   );
 };
+
+
 
 export default CreateForm;

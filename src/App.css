@@ -11,6 +11,11 @@
 
 }
 
+*{
+  padding: 0;
+  margin: 0;
+}
+
 body{
   font-family: 'Space Grotesk', sans-serif;
 }
@@ -188,4 +193,21 @@ body{
 
 .high button{
   margin-top: 0.5rem;
+}
+
+.tab{
+  cursor: pointer;
+}
+
+.active-tab{
+  color: #0C7FDA;
+  border-bottom: 3px solid #0C7FDA;
+  transition: 0.1s step-end;
+}
+
+.active-nav{
+  background-color: #0C7FDA;
+  color: blue;
+  padding: 4px;
+  border-radius: 4px;
 }

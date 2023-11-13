@@ -5,6 +5,7 @@ import or from '../../assets/images/or.svg'
 import '../../App.css'
 import Copy from './copy';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import axios from 'axios'
 
 // import logo from '../../assets/images/logo.png'
 
@@ -14,6 +15,8 @@ function Register() {
     // State to store form input values
     const [formData, setFormData] = useState({
         email: '',
+        firstName: '',
+        lastName: '',
         password: '',
     });
 
@@ -36,7 +39,7 @@ function Register() {
 
         // Send registration data to the server (replace with your actual API endpoint)
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/register/', {
+            const response = await fetch('localhost:3000/user/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,8 +52,11 @@ function Register() {
                 // const errorData = await response.json();
                 // setRegistrationStatus(errorData.message);
                 setNormal('default')
+                const userId = await response.json();
+                const store = userId.id
+                localStorage.setItem("user_id", store);
 
-                redirect('/activation');
+                window.location.href = '/activate';
                 setRegistrationStatus('Registration Successful');
                 console.log(formData)
                 
@@ -58,7 +64,7 @@ function Register() {
                 const errorData = await response.json();
                 setRegistrationStatus(errorData.message);
                 setNormal('destructive')
-                return redirect('/activation');
+                // return redirect('/activation');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -100,6 +106,28 @@ function Register() {
                                         id="email"
                                         name="email"
                                         value={formData.email}
+                                        onChange={handleInputChange}
+                                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="email">First Name</label>
+                                    <input
+                                        type="text"
+                                        id="firstName"
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        onChange={handleInputChange}
+                                        className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="email">Last Name</label>
+                                    <input
+                                        type="text"
+                                        id="lastName"
+                                        name="lastName"
+                                        value={formData.lastName}
                                         onChange={handleInputChange}
                                         className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                                     />

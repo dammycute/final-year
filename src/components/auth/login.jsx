@@ -27,14 +27,12 @@ const Login = () => {
         setShowPassword(!showPassword);
     };
 
-    const navigate = useNavigate();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Send login data to the server (replace with your actual API endpoint)
         try {
-            const response = await fetch('http://127.0.0.1:8000/auth/login/', {
+            const response = await fetch('http://127.0.0.1:8000/auth/login-token/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,8 +41,18 @@ const Login = () => {
             });
 
             if (response.ok) {
+                const userId = await response.json();
+                const store = userId.access_token
+                localStorage.setItem(store)
+                // signIn({
+                //     children,
+                //     token: store,
+                //     tokenType: "Bearer",
+                //     authState: {email: value.email}
+
+                // })
                 // Redirect to the dashboard or home page after successful login
-                navigate.push('/dashboard'); // Replace with your desired route
+                // window.location.href = "/dashboard";
             } else {
                 setLoginStatus('Login failed. Please check your credentials.');
             }
