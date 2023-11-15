@@ -5,13 +5,18 @@ import or from '../../assets/images/or.svg'
 import '../../App.css'
 import Copy from './copy';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux';
+import { register  as authRegister} from '../utils/authSlicer';
+import { register } from '../utils/action';
 
 // import logo from '../../assets/images/logo.png'
 
 
 
 function Register() {
+    const {isAuthenticated, user} = useSelector(state=> state.auth)
+    const dispatch = useDispatch()
+
     // State to store form input values
     const [formData, setFormData] = useState({
         email: '',
@@ -37,26 +42,28 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const email = formData.email
+        const firstname = formData.firstName
+        const lastname = formData.lastName
+        const password= e.target.password.value
+
         // Send registration data to the server (replace with your actual API endpoint)
         try {
-            const response = await fetch('localhost:3000/user/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            });
+            const response = await register(email, firstname, lastname, password)
+            // console.log(response)
 
-            if (response.ok) {
+            if (response) {
                 // Redirect to the activation page after a successful registration
                 // const errorData = await response.json();
                 // setRegistrationStatus(errorData.message);
-                setNormal('default')
-                const userId = await response.json();
-                const store = userId.id
-                localStorage.setItem("user_id", store);
+                // setNormal('default')
+                // const userId = await response.json();
+                // const store = userId.id
+                // localStorage.setItem("user_id", store);
+                console.log("Dami")
+                dispatch(authRegister({token: response}))
 
-                window.location.href = '/activate';
+                // window.location.href = '/activate';
                 setRegistrationStatus('Registration Successful');
                 console.log(formData)
                 

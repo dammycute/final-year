@@ -35,18 +35,13 @@ const Login = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const email = formData.email
+        const password = formData.password
 
         // Send login data to the server (replace with your actual API endpoint)
         try {
-            // const response = await fetch('http://127.0.0.1:8000/auth/login-token/', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(formData),
-            // });
-
-            const response = await login()
+            
+            const response = await login(email, password)
             console.log(response)
 
             if (response) {
@@ -56,7 +51,7 @@ const Login = () => {
 
 
                 // Redirect to the dashboard or home page after successful login
-                // window.location.href = "/dashboard";
+                window.location.href = "/";
             } else {
                 setLoginStatus('Login failed. Please check your credentials.');
             }

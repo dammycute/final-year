@@ -32,7 +32,7 @@ function App() {
         {/* <Route exact path="/set-password" element={<Recov} />  */}
         <Route exact path="/recover-password" element={<RecoverEmail />} />
         <Route exact path="/recover-password-otp" element={<RecoverCode />} />
-        <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route exact path="/" element={<Dashboard />} />
         <Route exact path="/projects" element={<ProjectList />} />
         <Route exact path="/create" element={<ProjectCreate />} />
         <Route exact path="/create-task" element={<CreateTask />} />

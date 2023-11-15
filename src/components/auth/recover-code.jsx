@@ -3,7 +3,9 @@ import Copy from "./copy";
 
 const RecoverCode = () => {
   const [formData, setFormData] = useState({
+    email: "",
     otp: "",
+    newPassword: "",
   });
 
   const [activationStatus, setActivationStatus] = useState("");
@@ -18,7 +20,7 @@ const RecoverCode = () => {
 
     try {
       // Send the OTP and new password to your server for validation and activation
-      const response = await fetch("http://127.0.0.1:8000/auth/activate/", {
+      const response = await fetch("localhost3000:/user/reset", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,9 +29,9 @@ const RecoverCode = () => {
       });
 
       if (response.ok) {
-        setActivationStatus("Activation successful");
+        setActivationStatus("Password changed successfully.");
       } else {
-        setActivationStatus("Activation failed");
+        setActivationStatus("Request failed or invalid current password");
       }
     } catch (error) {
       console.error("Error:", error);
