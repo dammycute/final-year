@@ -1,5 +1,5 @@
-import avatar from "../../assets/images/avatar.png";
-import line from "../../assets/images/line.svg";
+import avatar from "../../../assets/images/avatar.png";
+import line from "../../../assets/images/line.svg";
 
 import {
   Command,

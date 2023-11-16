@@ -1,0 +1,38 @@
+.setting_grid {
+  display: grid;
+  grid-template-columns: 12rem 30px repeat(3, 15rem) 50px;
+}
+
+.settings_nav {
+  grid-column: 1/2;
+}
+
+.settings_items {
+  grid-column: 3/6;
+}
+
+.setting_home_grid {
+  --gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(3, 15rem var(--gap));
+}
+
+.setting_home_grid > .setting_profile_disp {
+  grid-column: 1/2;
+  /* background-color: plum; */
+}
+
+.setting_home_grid > .setting_profile_edit {
+  grid-column: 3/-1;
+  /* background-color: plum; */
+}
+
+.form-data {
+  display: flex;
+  flex-direction: column;
+  width: 284px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  padding: 0.25rem 1rem;
+  font-size: 0.85rem;
+}

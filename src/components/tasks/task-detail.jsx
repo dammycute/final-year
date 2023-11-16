@@ -1,10 +1,10 @@
-import idea from "../../assets/images/idea.svg";
+import idea from "../../../assets/images/idea.svg";
 // import date from '../../assets/images/calendar.svg'
-import clock from "../../assets/images/clock.svg";
-import comment from "../../assets/images/Comments.svg";
-import more from "../../assets/images/more-vertical.svg";
-import avatar from "../../assets/images/avatar.png";
-import list from "../../assets/images/list.svg";
+import clock from "../../../assets/images/clock.svg";
+import comment from "../../../assets/images/Comments.svg";
+import more from "../../../assets/images/more-vertical.svg";
+import avatar from "../../../assets/images/avatar.png";
+import list from "../../../assets/images/list.svg";
 import { Link } from "react-router-dom";
 import CountdownTimer from "../utils/time";
 
