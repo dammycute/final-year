@@ -4,13 +4,13 @@ import Sidebar from "./sidebar";
 
 const dashboardLayout = () => {
   return (
-    <div className="h-screen">
+    <>
       <Header />
-      <div className="flex w-full h-full">
+      <div className="flex">
         <Sidebar />
         <Outlet />
       </div>
-    </div>
+    </>
   );
 };
 

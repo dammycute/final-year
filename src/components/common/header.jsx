@@ -6,10 +6,10 @@ const Header = () => {
   return (
     <>
       {/* Header */}
-      <header className="bg-white p-4 shadow-lg flex justify-between items-center">
+      <header className="bg-white p-2 shadow-lg flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-12" />
+          <img src={logo} alt="Logo" className="h-[2.85rem]" />
         </div>
         {/* Search Input */}
         <div className="contain flex gap-12">

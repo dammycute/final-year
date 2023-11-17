@@ -39,7 +39,11 @@ const Sidebar = () => {
               className="flex gap-6 py-2 pl-2 rounded-md items-center transition"
               style={({ isActive }) =>
                 isActive
-                  ? { color: "#0C7FDA", backgroundColor: "#E9F5FE" }
+                  ? {
+                      color: "#0C7FDA",
+                      backgroundColor: "#E9F5FE",
+                      fontWeight: "bold",
+                    }
                   : { backgroundColor: "transparent" }
               }
             >

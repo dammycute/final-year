@@ -17,7 +17,7 @@ const SettingsNavigation = () => {
     },
   ];
   return (
-    <div className="settings_nav h-full py-8 px-3 shadow-lg shadow-gray-500">
+    <div className="settings_nav h-full pt-4 px-3 shadow-lg shadow-gray-500">
       {links.map((link) => {
         return (
           <NavLink
@@ -26,7 +26,9 @@ const SettingsNavigation = () => {
             end
             className="flex justify-between items-center mx-2 py-2 px-auto text-sm"
             style={({ isActive }) =>
-              isActive ? { color: "#0C7FDA" } : { color: "inherit" }
+              isActive
+                ? { color: "#0C7FDA", fontWeight: "bold" }
+                : { color: "inherit" }
             }
           >
             {link.label}

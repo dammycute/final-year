@@ -14,7 +14,7 @@ import EditProfileForm from "./EditProfileForm";
 const GeneralSettings = () => {
   return (
     <div className="settings_items setting_home_grid">
-      <div className="mt-6 pt-5 text-center flex flex-col shadow-lg rounded-xl setting_profile_disp">
+      <div className="mt-2 pt-4 text-center flex flex-col shadow-lg rounded-xl setting_profile_disp">
         <div className="w-[130px] border-[3px] rounded-full border-[#ED2590] mx-auto">
           <img src={ProfilePhoto} alt="ProfilePhoto" className="w-full" />
         </div>
@@ -35,7 +35,7 @@ const GeneralSettings = () => {
 
       {/* Edit Profile Section */}
 
-      <div className="setting_profile_edit mt-6 p-8">
+      <div className="setting_profile_edit mt-6 p-4">
         <h2 className="font-bold text-lg">Edit Profile</h2>
         <div className="flex items-center gap-6 my-9">
           <div className="w-20 h-20 bg-[#CACACA] grid place-items-center rounded-full">
