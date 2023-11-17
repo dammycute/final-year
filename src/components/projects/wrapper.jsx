@@ -1,27 +1,27 @@
-import React from "react";
-import { Button } from "@/components/ui/button"
-import idea from '../../assets/images/idea.svg'
-import date from '../../assets/images/calendar.svg'
-import clock from '../../assets/images/clock.svg'
-import comment from '../../assets/images/Comments.svg'
-import more from '../../assets/images/more-vertical.svg'
-import avatar from '../../assets/images/avatar.png'
-import { Link } from 'react-router-dom'
+import { Button } from "@/components/ui/button";
+import idea from "../../../assets/images/idea.svg";
+import date from "../../../assets/images/calendar.svg";
+import clock from "../../../assets/images/clock.svg";
+import comment from "../../../assets/images/Comments.svg";
+import more from "../../../assets/images/more-vertical.svg";
+import avatar from "../../../assets/images/avatar.png";
+import { Link } from "react-router-dom";
 import CountdownTimer from "../utils/time";
 
 const Wrapper = () => {
   const handleFinish = () => {
     // Logic to execute when the countdown finishes
-    console.log('Task completed!');
+    console.log("Task completed!");
   };
   return (
     <>
       <div className="project-header flex justify-between items-center pt-2">
         <h1 className="text-3xl font-bold ">Projects</h1>
-        <Button className="bg-[#036EFF] px-4 text-xl"><Link to="/create" >Create</Link></Button>
+        <Button className="bg-[#036EFF] px-4 text-xl">
+          <Link to="/create">Create</Link>
+        </Button>
       </div>
       <div className="contain bg-white mt-2 p-4 rounded-lg">
-
         <div className="wrapper1">
           <div className="section">
             <img src={idea} alt="" />
@@ -60,7 +60,11 @@ const Wrapper = () => {
           <div className="section">
             <div className="time badged1">
               <img src={clock} alt="" />
-              <CountdownTimer className="px-4" initialHours={2} onFinish={handleFinish} />
+              <CountdownTimer
+                className="px-4"
+                initialHours={2}
+                onFinish={handleFinish}
+              />
             </div>
             <div className="profile">
               <img src={avatar} alt="" />

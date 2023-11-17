@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
-import clock from "../../assets/images/clock.svg";
-import React from "react";
+import clock from "../../../assets/images/clock.svg";
 import MonthsCounter from "../utils/months-count";
 import { Button } from "@/components/ui/button";
 
 const CommonComponent = () => {
-    const targetDate = new Date("2023-12-01");
+  const targetDate = new Date("2023-12-01");
   const handleFinish = () => {
     // Logic to execute when the countdown finishes
     console.log("Task completed!");
   };
   return (
     <div>
-        <div className="top-bar flex justify-between items-center">
+      <div className="top-bar flex justify-between items-center">
         <div className="top-left">
           <h2 className="font-bold">Slumbeigil</h2>
           <div className="top-left-text flex gap-4 items-center">
@@ -59,16 +58,16 @@ const CommonComponent = () => {
         </div>
 
         <div className="buttons flex justify-end gap-6">
-            <Button className="bg-[#EEF4FB] text-[#036EFF] px-4 text-md">
-              <Link to="/create">Add Task</Link>
-            </Button>
-            <Button className="bg-[#036EFF]  px-4 text-md">
-              <Link to="/create">Print Invoice</Link>
-            </Button>
-          </div>
+          <Button className="bg-[#EEF4FB] text-[#036EFF] px-4 text-md">
+            <Link to="/create">Add Task</Link>
+          </Button>
+          <Button className="bg-[#036EFF]  px-4 text-md">
+            <Link to="/create">Print Invoice</Link>
+          </Button>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CommonComponent
+export default CommonComponent;

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,9 +7,9 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { faker } from 'https://cdn.skypack.dev/@faker-js/faker';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
 
 ChartJS.register(
   CategoryScale,
@@ -22,60 +21,62 @@ ChartJS.register(
   Legend
 );
 
-
-
-
 const LineGraph = () => {
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  const labels = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+  ];
 
   const data = {
-
     labels,
     datasets: [
       {
-        label: 'Dataset 1',
+        label: "Dataset 1",
         data: labels.map(() => faker.datatype.number({ min: -1000, max: 700 })),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        yAxisID: 'y',
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        yAxisID: "y",
         tension: 0.5,
-        
       },
       {
-        label: 'Dataset 2',
+        label: "Dataset 2",
         data: labels.map(() => faker.datatype.number({ min: -1000, max: 500 })),
-        borderColor: 'rgb(53, 162, 235)',
-        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        borderColor: "rgb(53, 162, 235)",
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
         tension: 0.5,
-        yAxisID: 'y1',
+        yAxisID: "y1",
       },
     ],
   };
   const options = {
     responsive: true,
     interaction: {
-      mode: 'index',
+      mode: "index",
       intersect: false,
     },
     stacked: false,
     plugins: {
       title: {
         display: true,
-        text: 'Chart.js Line Chart - Multi Axis',
+        text: "Chart.js Line Chart - Multi Axis",
       },
     },
     scales: {
       y: {
-        type: 'linear',
+        type: "linear",
         display: true,
-        position: 'left',
+        position: "left",
         max: 1500,
-        
       },
       y1: {
-        type: 'linear',
+        type: "linear",
         display: true,
-        position: 'right',
+        position: "right",
         grid: {
           drawOnChartArea: false,
         },
@@ -85,9 +86,9 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
   return (
     <div>
-      <Line options={options} className='canvas' data={data} />
+      <Line options={options} className="canvas" data={data} />
     </div>
-  )
-}
+  );
+};
 
-export default LineGraph
+export default LineGraph;

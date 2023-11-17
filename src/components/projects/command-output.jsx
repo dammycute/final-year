@@ -1,11 +1,11 @@
-import avatar from '../../assets/images/avatar.png'
-import line from '../../assets/images/line.svg'
-import cancel from '../../assets/images/cancel.svg'
+import avatar from "../../../assets/images/avatar.png";
+import line from "../../../assets/images/line.svg";
+import cancel from "../../../assets/images/cancel.svg";
 import React from "react";
 
 const CommandOutput = () => {
   return (
-    <div className='output-contain bg-[#E9F5FE] rounded-md'>
+    <div className="output-contain bg-[#E9F5FE] rounded-md">
       <div className="output-ctn flex p-2 items-center justify-between">
         <div className="output">
           <div className="output-left flex items-center gap-4">
