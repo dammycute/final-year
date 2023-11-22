@@ -17,25 +17,28 @@ const SettingsNavigation = () => {
     },
   ];
   return (
-    <div className="settings_nav h-full pt-4 px-3 shadow-lg shadow-gray-500">
-      {links.map((link) => {
-        return (
-          <NavLink
-            key={link.label}
-            to={link.href}
-            end
-            className="flex justify-between items-center mx-2 py-2 px-auto text-sm"
-            style={({ isActive }) =>
-              isActive
-                ? { color: "#0C7FDA", fontWeight: "bold" }
-                : { color: "inherit" }
-            }
-          >
-            {link.label}
-            <IconRight className="w-3" />
-          </NavLink>
-        );
-      })}
+    <div className="settings_nav pt-4 px-3 shadow-lg shadow-gray-500 flex flex-col justify-between">
+      <div>
+        {links.map((link) => {
+          return (
+            <NavLink
+              key={link.label}
+              to={link.href}
+              end
+              className="flex justify-between items-center mx-2 py-2 px-auto text-sm"
+              style={({ isActive }) =>
+                isActive
+                  ? { color: "#0C7FDA", fontWeight: "bold" }
+                  : { color: "inherit" }
+              }
+            >
+              {link.label}
+              <IconRight className="w-3" />
+            </NavLink>
+          );
+        })}
+      </div>
+      <p className="text-[#EB5757] mb-10 ml-5">Logout</p>
     </div>
   );
 };

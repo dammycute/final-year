@@ -6,7 +6,7 @@ const SettingsLayout = () => {
   return (
     <div className="p-2 bg-[#F0F6FF] w-full">
       <h2 className="font-bold text-[#9A93B3] mb-3">Settings</h2>
-      <div className="bg-white setting_grid">
+      <div className="bg-white setting_grid rounded-md">
         <SettingsNavigation />
         <Outlet />
       </div>

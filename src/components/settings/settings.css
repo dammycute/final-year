@@ -1,10 +1,13 @@
 .setting_grid {
   display: grid;
-  grid-template-columns: 12rem 30px repeat(3, 15rem) 50px;
+  grid-template-columns: 13.5rem 30px repeat(3, 1fr) 30px;
+  height: 100%;
+  overflow-y: hidden;
 }
 
 .settings_nav {
   grid-column: 1/2;
+  height: calc(100% - 14rem);
 }
 
 .settings_items {
@@ -12,33 +15,109 @@
 }
 
 .setting_home_grid {
-  --gap: 24px;
+  --gap: 30px;
   display: grid;
   grid-template-columns: repeat(3, 15rem var(--gap));
+  /* height: calc(100% - 8rem); */
 }
 
 .setting_home_grid > .setting_profile_disp {
   grid-column: 1/2;
-  /* background-color: plum; */
+  height: calc(100% - 16rem);
 }
 
 .setting_home_grid > .setting_profile_edit {
   grid-column: 3/-1;
   /* background-color: plum; */
+  height: calc(100% - 16rem);
 }
 
 .form-data {
   display: flex;
   flex-direction: column;
-  width: 280px;
+  width: 284px;
   /* border: 2px solid; */
   @apply border-gray-300 border-solid border text-gray-500;
   border-radius: 8px;
-  padding: 0.28rem 1rem;
+  padding: 8px 16px;
   font-size: 0.85rem;
+}
+
+.form-data > label {
+  font-size: 10px;
+  font-weight: bold;
 }
 
 .form-data input,
 .form-data select {
-  @apply border-none py-1 px-4 my-1;
+  @apply border-none mt-[0.15rem];
+}
+
+.password_setting {
+  grid-column: 2/5;
+}
+
+.notification_setting {
+  grid-column: 2/-1;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.form-field > input {
+  border: 1px solid #e7e7e7;
+  border-radius: 5px;
+  padding: 8px 14px;
+  width: 100%;
+}
+
+.form-field > label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form-field > .dots {
+  position: absolute;
+  top: 60%;
+  left: 5%;
+}
+
+.notification_setting > .notification_field input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 70px;
+  height: 32px;
+  background-color: rgb(235, 235, 235);
+  position: relative;
+  border-radius: 25px;
+  box-shadow: 0 0 15px #0000001e;
+  transition: background-color 0.2s;
+}
+
+.notification_setting > .notification_field input[type="checkbox"]::after {
+  position: absolute;
+  content: "";
+  top: 50%;
+  left: 10%;
+  width: 25px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: white;
+  transform: translate(-10%, -50%);
+  transition: left 0.2s;
+}
+
+.notification_setting > .notification_field input[type="checkbox"]:checked {
+  background-color: #2d9cdb;
+}
+
+.notification_setting
+  > .notification_field
+  input[type="checkbox"]:checked::after {
+  left: 60%;
 }

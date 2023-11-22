@@ -6,6 +6,7 @@ import Vector from "../../../assets/settings/Vector.svg";
 import Person from "../../../assets/settings/bi_person-plus-fill.svg";
 import Scraps from "../../../assets/settings/scraps.png";
 import BlockSymbol from "../../../assets/settings/block.png";
+import Ellipse from "../../../assets/settings/Ellipse.svg";
 
 export {
   ProfilePhoto,
@@ -16,4 +17,5 @@ export {
   Person,
   Scraps,
   BlockSymbol,
+  Ellipse,
 };

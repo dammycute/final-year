@@ -14,13 +14,13 @@ const Sidebar = () => {
     },
     {
       title: "Project",
-      href: "projects",
+      href: "/projects",
       img: edit,
       alt: "project-link",
     },
     {
       title: "Setting",
-      href: "settings",
+      href: "/settings",
       img: setting,
       alt: "setting-link",
     },
@@ -28,7 +28,7 @@ const Sidebar = () => {
 
   return (
     // side bar
-    <div className="bg-white text-gray-400 px-4 py-12 text-sm">
+    <div className="bg-white text-gray-400 px-3 py-12 text-sm overflow-hidden">
       <div className="w-[12rem]">
         {dashboardLinks.map((link) => {
           return (
@@ -36,7 +36,7 @@ const Sidebar = () => {
               key={link.title}
               to={link.href}
               end={link.end}
-              className="flex gap-6 py-2 pl-2 rounded-md items-center transition"
+              className="flex gap-6 py-2 pl-2 rounded-md mr-8 items-center transition"
               style={({ isActive }) =>
                 isActive
                   ? {
