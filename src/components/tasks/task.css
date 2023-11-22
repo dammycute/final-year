@@ -1,0 +1,17 @@
+/* .other-members::after {
+  position: absolute;
+  content: "+2";
+} */
+
+.team-member:nth-child(1) {
+  transform: translateX(0%);
+}
+.team-member:nth-child(2) {
+  transform: translateX(-25%);
+}
+.team-member:nth-child(3) {
+  transform: translateX(-50%);
+}
+.team-member:nth-child(4) {
+  transform: translateX(-75%);
+}

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const TaskSearch = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearchChange = (e) => {
@@ -10,7 +10,7 @@ const TaskSearch = () => {
     setSearchQuery(query);
 
     // Find h1 elements with text matching the search query
-    const filteredResults = Array.from(document.querySelectorAll('h1')).filter(
+    const filteredResults = Array.from(document.querySelectorAll("h1")).filter(
       (h1) => h1.textContent.toLowerCase().includes(query)
     );
 
@@ -31,7 +31,7 @@ const TaskSearch = () => {
           <ul>
             {searchResults.map((result, index) => (
               <li key={index}>
-                <Link to={`#${result.id}`} onClick={() => setSearchQuery('')}>
+                <Link to={`#${result.id}`} onClick={() => setSearchQuery("")}>
                   {result.textContent}
                 </Link>
               </li>
