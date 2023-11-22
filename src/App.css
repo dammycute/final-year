@@ -125,6 +125,7 @@ body {
   border-radius: 12px;
   margin-block: 1rem;
   box-shadow: 2px 4px 6px 2px rgb(0 0 0 / 0.1), 2px 2px 4px 2px rgb(0 0 0 / 0.1);
+  cursor: pointer;
 }
 
 .wrapper1 span {
@@ -161,7 +162,7 @@ body {
 
 .badged1 {
   background-color: #ebf9f1;
-  padding: 0.4rem;
+  padding: 0.4rem 0.7rem;
   border-radius: 40px;
   color: #1f9254;
 }
@@ -208,3 +209,171 @@ body {
   padding: 4px;
   border-radius: 4px;
 }
+
+
+
+/* Popover styling */
+
+/* Add these styles to your stylesheet */
+
+.popover-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popover-card {
+  width: 100%;
+  max-width: 800px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 16px;
+}
+
+.popover-card p, .popover-card span{
+  font-size: 14px;
+}
+
+.popover-header {
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.popover-header p{
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.popover-header .title h1{
+  font-size: 20px;
+  font-weight: 600px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.popover-header .time{
+  font-size: 1rem;
+}
+
+.popover-header button{
+  font-size: 20px;
+}
+
+.popover-header .desc-ctn{
+  padding-block: 0.4rem;
+}
+
+.popover-header .right button{
+  background-color: #F06A6A;
+  font-size: 16px;
+  padding: 6px 12px;
+  width: 120px;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.popover-header .people{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  align-content: flex-start;
+  justify-content: left;
+}
+
+.popover-header .people img{
+  width: 100%;
+  max-width: 25px;
+}
+
+.popover-header .right{
+  text-align: right;
+}
+
+.popover-header .right .green{
+  background-color: #4BA665;
+}
+
+.popover-header .assign{
+  width: 100%;
+  max-width: 400px;
+  justify-content: space-between;
+  display: flex;
+  /* gap: 4em; */
+  align-items: center;
+}
+
+.popover-header .left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #777;
+}
+
+.popover-content .attachment {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: .7rem;
+}
+
+.popover-content .attachment h2{
+  padding-bottom: 0.8rem;
+}
+
+.popover-content .attachment .document{
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+  padding-block: 0.5rem;
+}
+
+.document a{
+  color: #0974C6;
+}
+
+
+
+.popover-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.popover-footer{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding-block: 0.8rem;
+}
+
+.popover-footer img{
+  width: 100%;
+  max-width: 25px;
+}
+
+.popover-footer p{
+  width: 100%;
+  background-color: #F3F4F6;
+  padding: .7em 0.5em;
+  border-radius: 4px;
+}
+
