@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 
 const UserSelect = ({ backendUrl }) => {
@@ -27,10 +27,12 @@ const UserSelect = ({ backendUrl }) => {
   };
 
   const options = users.map((user) => ({
-    label: <div className="flex justify-between">
-      <p>{user.email}</p>
-      <p>{user.name}</p>
-    </div>,
+    label: (
+      <div className="flex justify-between">
+        <p>{user.email}</p>
+        <p>{user.name}</p>
+      </div>
+    ),
     value: user.id,
   }));
 
