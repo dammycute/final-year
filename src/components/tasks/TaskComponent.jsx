@@ -1,11 +1,12 @@
 import { Blair, Calendar, James, Karen, Sara, VerticalBar } from "./TaskImages";
 
-const TaskComponent = ({ title, startdate, enddate, duration }) => {
+const TaskComponent = ({ title, startdate, enddate, duration, day }) => {
   return (
     <div
       className="flex items-center justify-between h-16 shadow-lg py-5 px-10 rounded-xl text-sm z-[1000] bg-white my-3"
       style={{
         width: `${duration}px`,
+        marginLeft: `${(day - 1) * 30}px`,
       }}
     >
       <div className="">

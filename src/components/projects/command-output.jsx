@@ -20,10 +20,10 @@ const CommandOutput = () => {
           <p>Civil Engineer</p>
         </div>
         <div className="output">
-          <img src={cancel} alt="" />
+          <img src={cancel} alt="cancel" />
         </div>
       </div>
-      <img src={line} alt="" />
+      <img src={line} alt="line" />
     </div>
   );
 };

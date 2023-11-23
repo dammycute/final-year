@@ -1,8 +1,8 @@
 import TaskDetail from "./task-detail";
 
-const TaskList = () => {
+const TaskList = ({ id }) => {
   return (
-    <div>
+    <div id={id}>
       <TaskDetail />
       <TaskDetail />
       <TaskDetail />
