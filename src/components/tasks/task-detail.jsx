@@ -7,15 +7,28 @@ import avatar from "../../../assets/images/avatar.png";
 import list from "../../../assets/images/list.svg";
 import { Link } from "react-router-dom";
 import CountdownTimer from "../utils/time";
+import PopoverCard from "./popover";
+import { useState } from "react";
 
 const TaskDetail = () => {
   const handleFinish = () => {
     // Logic to execute when the countdown finishes
     console.log("Task completed!");
   };
+
+  const [isPopoverVisible, setPopoverVisible] = useState(false);
+
+  const handleTaskDetailClick = () => {
+    // Toggle the visibility of the popover when the task detail is clicked
+    setPopoverVisible(!isPopoverVisible);
+  };
+
+  const closePopover = () => {
+    setPopoverVisible(false);
+  };
   return (
     <>
-      <div className="contain bg-white mt-2 rounded-lg">
+      <div className="contain bg-white mt-2 rounded-lg" onClick={handleTaskDetailClick}>
         <div className="wrapper1 px-8">
           <div className="section">
             <img src={idea} alt="" />
@@ -51,6 +64,8 @@ const TaskDetail = () => {
           </div>
         </div>
       </div>
+
+      {isPopoverVisible && <PopoverCard onClose={closePopover} />}
     </>
   );
 };

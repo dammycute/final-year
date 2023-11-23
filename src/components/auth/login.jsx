@@ -122,7 +122,6 @@ const Login = () => {
                 </div>
                 <Copy/>
             </div>
-
             {loginStatus && <p>{loginStatus}</p>}
         </div>
     );
