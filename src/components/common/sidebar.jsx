@@ -28,7 +28,7 @@ const Sidebar = () => {
 
   return (
     // side bar
-    <div className="bg-white text-gray-400 px-3 py-12 text-sm overflow-hidden">
+    <div className="bg-white text-gray-400 px-3 py-12 text-sm min-h-[47rem] overflow-hidden">
       <div className="w-[12rem]">
         {dashboardLinks.map((link) => {
           return (

@@ -2,51 +2,75 @@ import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 // import ProjectCreate from "../projects/create";
 // import CreateForm from "../projects/create-form";
-// import TaskList from "./task-list";
+import TaskList from "./task-list";
 import { Link } from "react-router-dom";
 import TasksTimeline from "./TasksTimeline";
+import TasksBoard from "./TasksBoard";
+import { useState, useEffect } from "react";
 
 const TaskTab = () => {
+  const [activePanel, setActivePanel] = useState(null);
+  const [activeTab, setActiveTab] = useState(null);
+
   const tabs = [
     {
       title: "List",
-      href: ".",
-      end: true,
+      href: "#list",
+      id: "tab-1",
+      click: () => {
+        setActiveTab("tab-1");
+        setActivePanel(<TaskList />);
+      },
     },
     {
       title: "Board",
-      href: "/projects",
+      href: "#board",
+      id: "tab-2",
+      click: () => {
+        setActiveTab("tab-2");
+        setActivePanel(<TasksBoard />);
+      },
     },
     {
       title: "Timeline",
-      href: "/settings",
+      href: "#timeline",
+      id: "tab-3",
+      click: () => {
+        setActiveTab("tab-3");
+        setActivePanel(<TasksTimeline id="timeline" />);
+      },
     },
   ];
 
+  const style = {
+    color: "#0C7FDA",
+    fontWeight: "bold",
+    fontSize: "0.9rem",
+    borderBottom: "3px solid #0C7FDA",
+  };
+
+  useEffect(() => {
+    setActiveTab("tab-1");
+    setActivePanel(<TaskList id="list" />);
+  }, []);
+
   return (
     <div className="">
-      <div className="tab-container flex gap-6 pt-4 pl-8 pr-16">
+      <ul className="tab-container flex gap-10 pt-4 pl-8 pr-16">
         {tabs.map((tab) => {
           return (
-            <Link
+            <li
               key={tab.title}
-              end={tab.end}
-              // style={({ isActive }) =>
-              //   isActive
-              //     ? {
-              //         color: "#0C7FDA",
-              //         fontWeight: "bold",
-              //         fontSize: "0.9rem",
-              //         borderBottom: "3px solid #0C7FDA",
-              //       }
-              //     : { color: "black" }
-              // }
+              style={activeTab === tab.id ? style : null}
+              onClick={tab.click}
             >
-              {tab.title}
-            </Link>
+              <Link href={tab.href} id={tab.id}>
+                {tab.title}
+              </Link>
+            </li>
           );
         })}
-      </div>
+      </ul>
       <hr />
       <div className="contain flex justify-between my-4 items-center pl-8 pr-16">
         <div className="relative flex items-center">
@@ -70,9 +94,7 @@ const TaskTab = () => {
         </div>
       </div>
       <div className="tab-content w-full h-[20rem] p-0 overflow-auto">
-        {/* <TaskList /> */}
-        {/* <CreateForm /> */}
-        <TasksTimeline />
+        {activePanel}
       </div>
     </div>
   );
