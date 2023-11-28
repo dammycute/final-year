@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const register = async (email, password, firstname, lastname) => {
-  const response = await axios.post("localhost:3000/user/register/", {
+  const response = await axios.post("https://pm-api.cyclic.app/user/register/", {
     email: email,
     firstname: firstname,
     lastname: lastname,
@@ -32,7 +32,7 @@ export const register = async (email, password, firstname, lastname) => {
 };
 
 export const login = async (email, password) => {
-  const response = await axios.post("localhost:3000/user/ogin", {
+  const response = await axios.post("https://pm-api.cyclic.app/user/ogin", {
     email: email ,
     password: password,
   });
