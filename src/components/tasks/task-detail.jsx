@@ -1,4 +1,4 @@
-import idea from "../../../assets/images/idea.svg";
+import idea from "../../../assets/images/Idea.svg";
 // import date from '../../assets/images/calendar.svg'
 import clock from "../../../assets/images/clock.svg";
 import comment from "../../../assets/images/Comments.svg";

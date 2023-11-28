@@ -22,9 +22,39 @@ function Register() {
     lastName: "",
     password: "",
   });
+  const [errors, setErrors] = useState({ email: '', password: '', firstName: '', lastName: '' });
 
   // State to handle registration status
   const [registrationStatus, setRegistrationStatus] = useState("");
+
+// Form Validation
+const validateForm = () => {
+  let isValid = true;
+  let newErrors = { email: '', password: '', firstName: '', lastName: '' };
+
+  if (!formData.email) {
+    isValid = false;
+    newErrors.email = 'Please enter a valid email.';
+  }
+
+  if (!formData.password) {
+    isValid = false;
+    newErrors.password = 'Please enter a valid password.';
+  }
+
+  if (!formData.firstName) {
+    isValid = false;
+    newErrors.firstName = 'Please enter a valid first name.';
+  }
+
+  if (!formData.lastName) {
+    isValid = false;
+    newErrors.lastName = 'Please enter a valid last name.';
+  }
+
+  setErrors(newErrors);
+  return isValid;
+};
 
   // Handle form input changes
   const handleInputChange = (e) => {
@@ -112,6 +142,7 @@ function Register() {
                     onChange={handleInputChange}
                     className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                   />
+                  {errors.email && <p className="text-red-500">{errors.email}</p>}
                 </div>
                 <div>
                   <label htmlFor="email">First Name</label>
@@ -123,6 +154,7 @@ function Register() {
                     onChange={handleInputChange}
                     className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                   />
+                  {errors.firstName && <p className="text-red-500">{errors.firstName}</p>}
                 </div>
                 <div>
                   <label htmlFor="email">Last Name</label>
@@ -134,6 +166,7 @@ function Register() {
                     onChange={handleInputChange}
                     className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                   />
+                  {errors.lastName && <p className="text-red-500">{errors.lastName}</p>}
                 </div>
                 <div>
                   <label htmlFor="password">Password:</label>
@@ -145,6 +178,7 @@ function Register() {
                     className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                     onChange={handleInputChange}
                   />
+                  {errors.password && <p className="text-red-500">{errors.password}</p>}
                 </div>
                 <div className="form-btn flex items-center justify-center">
                   <button

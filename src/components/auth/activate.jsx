@@ -1,47 +1,58 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const Activation = () => {
   const [formData, setFormData] = useState({
-    user: "",
-    activation_code: "",
+    userId: "",
+    otp: "",
   });
 
   const [activationStatus, setActivationStatus] = useState("");
+  const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
-    const storedUserId = localStorage.getItem('user_id');
+    const storedUserId = localStorage.getItem("user_id");
     if (storedUserId) {
-      setFormData((prevData) => ({ ...prevData, user: storedUserId }));
+      setFormData((prevData) => ({ ...prevData, userId: storedUserId }));
     }
   }, []);
+
+  const validateForm = () => {
+    const errors = {};
+
+    if (!formData.otp.trim()) {
+      errors.otp = "Activation code is required";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  console.log(formData)
-
-  const [normal, setNormal] = useState("default");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const storedUserId = localStorage.getItem("user_id");
-    console.log(storedUserId);
+
+    if (!validateForm()) {
+      return;
+    }
+
     try {
-      const response = await fetch(
-        "localhost:3000/user/verify",
+      const response = await axios.post(
+        "https://pm-api.cyclic.app/user/verify",
+        formData,
         {
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
         }
       );
 
-      if (response.ok) {
+      if (response.status === 200) {
         window.location.href = "/login";
         setActivationStatus("Activation successful");
       } else {
@@ -49,7 +60,6 @@ const Activation = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setNormal("destructive");
       setActivationStatus("Activation failed");
     }
   };
@@ -69,21 +79,26 @@ const Activation = () => {
           <form onSubmit={handleSubmit}>
             <input
               type="hidden"
-              id="user"
-              name="user"
-              value={formData.user}
+              id="userId"
+              name="userId"
+              value={formData.userId}
               onChange={handleInputChange}
             />
             <div>
-              <label htmlFor="activation_code">Verification Code</label>
+              <label htmlFor="otp">Verification Code</label>
               <input
                 type="text"
-                id="activation_code"
-                name="activation_code"
-                value={formData.activation_code}
-                className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                id="otp"
+                name="otp"
+                value={formData.otp}
+                className={`mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 ${
+                  formErrors.otp ? "border-red-500" : ""
+                }`}
                 onChange={handleInputChange}
               />
+              {formErrors.otp && (
+                <p className="text-red-500">{formErrors.otp}</p>
+              )}
             </div>
 
             <div className="form-btn flex items-center justify-center">

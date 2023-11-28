@@ -1,7 +1,7 @@
 import "./App.css";
 import Register from "./components/auth/register";
 import Activation from "./components/auth/activate";
-import Dashboard from "./components/dashboard/Dashboard.jsx";
+import Dashboard from "./components/dashboard/dashboard.jsx";
 import DashboardLayout from "./components/common/dashboardLayout.jsx";
 import Login from "./components/auth/login";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";

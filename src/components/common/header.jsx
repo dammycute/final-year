@@ -1,4 +1,4 @@
-import logo from "../../../assets/images/icon.svg";
+import logo from "../../../assets/images/Icon.svg";
 import bell from "../../../assets/images/notification.svg";
 import avatar from "../../../assets/images/avatar.png";
 
