@@ -32,7 +32,7 @@ export const register = async (email, password, firstname, lastname) => {
 };
 
 export const login = async (email, password) => {
-  const response = await axios.post("https://pm-api.cyclic.app/user/ogin", {
+  const response = await axios.post("https://pm-api.cyclic.app/user/login/", {
     email: email ,
     password: password,
   });
