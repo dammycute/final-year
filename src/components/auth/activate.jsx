@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import Loader from "../utils/loader";
+import { useNavigate } from "react-router-dom";
 
 const Activation = () => {
   const [formData, setFormData] = useState({
@@ -8,13 +10,15 @@ const Activation = () => {
     otp: "",
   });
 
+  const [loading, setLoading] = useState(false);
   const [activationStatus, setActivationStatus] = useState("");
   const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUserId = localStorage.getItem("user_id");
     if (storedUserId) {
-      setFormData((prevData) => ({ ...prevData, userId: storedUserId }));
+      setFormData((prevData) => ({ ...prevData, userId: "657644c3bff21e9b9965a358" }));
     }
   }, []);
 
@@ -40,6 +44,7 @@ const Activation = () => {
     if (!validateForm()) {
       return;
     }
+    setLoading(true)
 
     try {
       const response = await axios.post(
@@ -53,7 +58,7 @@ const Activation = () => {
       );
 
       if (response.status === 200) {
-        window.location.href = "/login";
+        navigate("/login");
         setActivationStatus("Activation successful");
       } else {
         setActivationStatus("Activation failed");
@@ -61,7 +66,8 @@ const Activation = () => {
     } catch (error) {
       console.error("Error:", error);
       setActivationStatus("Activation failed");
-    }
+    
+    }setLoading(false)
   };
 
   return (
@@ -105,8 +111,9 @@ const Activation = () => {
               <button
                 type="submit"
                 className="bg-black text-white rounded-lg px-12 max-w-full my-5 py-2"
+                disabled={loading}
               >
-                Activate Account
+                {loading ? <Loader /> : "Activate Account"}
               </button>
             </div>
 

@@ -4,14 +4,13 @@ import Activation from "./components/auth/activate";
 import Dashboard from "./components/dashboard/dashboard.jsx";
 import DashboardLayout from "./components/common/dashboardLayout.jsx";
 import Login from "./components/auth/login";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProjectList from "./components/projects/project-list";
 import ProjectCreate from "./components/projects/create";
-// import Null from "../null";
 import CreateTask from "./components/tasks/create-task";
 import SetPassword from "./components/auth/set-password";
 import RecoverEmail from "./components/auth/recover-email";
-import { Provider, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import store from "./components/utils/store.js";
 // import TaskList from "./components/tasks/task-list";
 import TaskPage from "./components/tasks/task";
@@ -24,7 +23,7 @@ import ProjectLayout from "./components/projects/ProjectLayout.jsx";
 import ProtectedRoute from "./components/utils/protect.jsx";
 
 function App() {
-  const isAuthenticated = useSelector((state) => state.isAuthenticated);
+
   return (
     <Provider store={store}>
       <Router>
@@ -37,20 +36,20 @@ function App() {
           {/* <Route exact path="/set-password" element={<Recov} />  */}
           <Route exact path="/recover-password" element={<RecoverEmail />} />
           <Route exact path="/recover-password-otp" element={<RecoverCode />} />
-          {/* <ProtectedRoute> */}
-            <Route exact path="/" element={isAuthenticated ? <DashboardLayout />: <Navigate to="/login" />}>
-              <Route index element={<Dashboard />} />
 
-              <Route exact path="settings" element={<SettingsLayout />}>
-                <Route index element={<GeneralSettings />} />
-                <Route path="password" element={<PasswordSetting />} />
-                <Route path="notification" element={<Notification />} />
-              </Route>
+          <Route exact path="/" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+
+            <Route exact path="settings" element={<SettingsLayout />}>
+              <Route index element={<GeneralSettings />} />
+              <Route path="password" element={<PasswordSetting />} />
+              <Route path="notification" element={<Notification />} />
+            </Route>
 
               <Route exact path="projects" element={<ProjectLayout />}>
                 <Route index element={<ProjectList />} />
                 <Route path="create" element={<ProjectCreate />} />
-                <Route exact path="tasks">
+                <Route exact path=":projectId/tasks">
                   <Route index element={<TaskPage />} />
                   <Route path="create-task" element={<CreateTask />} />
                 </Route>

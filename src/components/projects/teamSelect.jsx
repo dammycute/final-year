@@ -1,47 +1,43 @@
 import { useState, useEffect } from "react";
 import Select from "react-select";
 
-const UserSelect = ({ backendUrl }) => {
+const TeamSelect = ({ backendUrl, onSelectUser }) => {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
     async function fetchUsers() {
-      const response = await fetch(backendUrl, {
-        headers: {
-          Authorization: token,
-        },
-      });
-      const users = await response.json();
-      
-      setUsers(users);
+      try {
+        const response = await fetch(backendUrl, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        const users = await response.json();
+        setUsers(users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
     }
 
     fetchUsers();
   }, [backendUrl]);
 
   const handleSearch = (inputValue) => {
-    if (typeof inputValue === 'string') {
-      const filteredUsers = users.filter((user) =>
-        user.email.toLowerCase().includes(inputValue.toLowerCase())
-      );
-      setUsers(filteredUsers);
-    }
+    const filteredUsers = users.filter((user) =>
+      user.email.toLowerCase().includes(inputValue.toLowerCase())
+    );
+    setUsers(filteredUsers);
   };
-  
 
   const handleChange = (selectedOption) => {
     setSelectedUser(selectedOption);
+    onSelectUser(selectedOption);
   };
 
   const options = users.map((user) => ({
-    label: (
-      <div className="flex justify-between">
-        <p>{user.email}</p>
-        <p>{user.name}</p>
-      </div>
-    ),
+    label: user.email,
     value: user.id,
   }));
 
@@ -53,10 +49,10 @@ const UserSelect = ({ backendUrl }) => {
         onChange={handleChange}
         onInputChange={handleSearch}
         placeholder="Select a user to add to the project"
-        linkTo={backendUrl}
+        isSearchable
       />
     </div>
   );
 };
 
-export default UserSelect;
+export default TeamSelect;

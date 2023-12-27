@@ -7,7 +7,7 @@ const TaskList = ({ id }) => {
       <TaskDetail />
       <TaskDetail />
       <TaskDetail />
-    </div>
+    </div>              
   );
 };
 

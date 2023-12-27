@@ -13,10 +13,6 @@ const ProjectList = () => {
       </div>
       <div className="rounded-lg bg-white p-8 h-[calc(100%-10rem)] overflow-y-scroll">
         <Wrapper />
-        <Wrapper />
-        <Wrapper />
-        <Wrapper />
-        <Wrapper />
       </div>
     </>
   );

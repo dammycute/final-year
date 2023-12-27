@@ -18,6 +18,7 @@ export const register = async (email, password, firstname, lastname) => {
   const token = response.data.token;
   const user = response.data._id;
 
+
   // Save the token to local storage
   localStorage.setItem("token", token);
   localStorage.setItem("user_id", user);
@@ -43,7 +44,7 @@ export const login = async (email, password) => {
   //   user_id:12653765,
   // }
 
-  const token = response.data.access_token;
+  const token = response.data.token;
 
   // Save the token to local storage
   localStorage.setItem("token", `Bearer ${token}`);

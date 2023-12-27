@@ -86,7 +86,7 @@ const TaskTab = () => {
 
         <div className="buttons flex justify-end gap-6 text-sm">
           <Button className="bg-[#EEF4FB] text-[#036EFF] px-4 text-md">
-            <Link to="/projects/tasks/create-task">Add Task</Link>
+            <Link to="/projects/3/tasks/create-task">Add Task</Link>
           </Button>
           <Button className="bg-[#036EFF]  px-4 text-md">
             <Link to="/invoice">Print Invoice</Link>

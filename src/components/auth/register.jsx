@@ -8,12 +8,16 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { useDispatch, useSelector } from "react-redux";
 import { register as authRegister } from "../utils/authSlicer";
 import { register } from "../utils/action";
+import Loader from "../utils/loader";
 
 // import logo from '../../../assets/images/logo.png'
 
 function Register() {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+
 
   // State to store form input values
   const [formData, setFormData] = useState({
@@ -70,42 +74,41 @@ const validateForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!validateForm()) {
+      // Form validation failed, do not proceed with submission
+      return;
+    }
+
     const email = formData.email;
     const firstname = formData.firstName;
     const lastname = formData.lastName;
     const password = e.target.password.value;
 
+    setLoading(true)
     // Send registration data to the server (replace with your actual API endpoint)
     try {
       const response = await register(email, firstname, lastname, password);
       // console.log(response)
 
       if (response) {
-        // Redirect to the activation page after a successful registration
-        // const errorData = await response.json();
-        // setRegistrationStatus(errorData.message);
-        // setNormal('default')
-        // const userId = await response.json();
-        // const store = userId.id
-        // localStorage.setItem("user_id", store);
-        console.log("Dami");
+        
         dispatch(authRegister({ token: response }));
 
-        // window.location.href = '/activate';
+        return redirect('/activation');
         setRegistrationStatus("Registration Successful");
         console.log(formData);
       } else {
         const errorData = await response.json();
         setRegistrationStatus(errorData.message);
         setNormal("destructive");
-        // return redirect('/activation');
+        
       }
     } catch (error) {
       console.error("Error:", error);
       setRegistrationStatus("Registration failed");
       setNormal("destructive");
       // return redirect('/activation');
-    }
+    }setLoading(false)
   };
 
   return (
@@ -184,8 +187,9 @@ const validateForm = () => {
                   <button
                     type="submit"
                     className="bg-black w-full text-white rounded-lg px-12 max-w-full my-5 py-2"
+                    disabled={loading}
                   >
-                    Create Account
+                    {loading ? <Loader /> : "Create Account"}
                   </button>
                 </div>
 
