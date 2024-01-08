@@ -55,7 +55,7 @@ const Login = () => {
 
       if (response) {
         // const userDetails = await response.json();
-        console.log("FELIX");
+        console.log(response);
         dispatch(authLogin({ payload: response }));
 
         // Redirect to the dashboard or home page after successful login

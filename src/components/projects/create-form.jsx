@@ -172,7 +172,7 @@ const CreateForm = () => {
                 />
               </div>
             </div>
-            <div className="middle p-4">
+            <div className="middle py-4">
               <label htmlFor="description">Project Description</label>
               <textarea
                 rows={3}

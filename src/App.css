@@ -99,6 +99,7 @@ body {
 .three {
   grid-column: 1/5;
   grid-row: 3/7;
+  width: 100%;
 }
 
 .four {
@@ -113,6 +114,13 @@ body {
 
 .canvas {
   max-height: 290px;
+
+}
+
+.schedule{
+  float: right;
+  width: 100%;
+  max-width: 100px;
 }
 
 .wrapper1 {

@@ -25,6 +25,7 @@ function Register() {
     firstName: "",
     lastName: "",
     password: "",
+    designation: "",
   });
   const [errors, setErrors] = useState({ email: '', password: '', firstName: '', lastName: '' });
 
@@ -83,11 +84,13 @@ const validateForm = () => {
     const firstname = formData.firstName;
     const lastname = formData.lastName;
     const password = e.target.password.value;
+    const designation = e.target.designation.value;
+    
 
     setLoading(true)
     // Send registration data to the server (replace with your actual API endpoint)
     try {
-      const response = await register(email, firstname, lastname, password);
+      const response = await register(email, firstname, lastname, password, designation);
       // console.log(response)
 
       if (response) {
@@ -170,6 +173,18 @@ const validateForm = () => {
                     className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
                   />
                   {errors.lastName && <p className="text-red-500">{errors.lastName}</p>}
+                </div>
+                <div>
+                  <label htmlFor="email">Designation</label>
+                  <input
+                    type="text"
+                    id="designation"
+                    name="designation"
+                    value={formData.designation}
+                    onChange={handleInputChange}
+                    className="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
+                  />
+                  {errors.designation && <p className="text-red-500">{errors.lastName}</p>}
                 </div>
                 <div>
                   <label htmlFor="password">Password:</label>

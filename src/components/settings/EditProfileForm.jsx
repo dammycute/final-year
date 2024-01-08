@@ -56,7 +56,7 @@ const EditProfileForm = () => {
 
       const response = await axios.patch("https://pm-api.cyclic.app/user/edit", formDataToSubmit, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: token,
           "Content-Type": "multipart/form-data",
         },
       });
@@ -102,7 +102,7 @@ const EditProfileForm = () => {
             placeholder="Yash"
             id="firstname"
             name="firstName"
-            value={formData.firstName}
+            value={formData.firstName} 
             onChange={handleInputChange}
           />
         </div>

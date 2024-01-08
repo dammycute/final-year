@@ -1,8 +1,40 @@
 import logo from "../../../assets/images/Icon.svg";
 import bell from "../../../assets/images/notification.svg";
 import avatar from "../../../assets/images/avatar.png";
+import { useState, useEffect } from "react";
 
 const Header = () => {
+  const userId = localStorage.getItem("user_id");
+  const token = localStorage.getItem("token");
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(
+          `https://pm-api.cyclic.app/user/get-user/${userId}`,
+
+          {
+            headers: {
+              Authorization: token,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        setUserData(data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    const user = localStorage.getItem("userId");
+    console.log(user);
+
+    fetchUserData();
+  }, [userId]);
+
   return (
     <>
       {/* Header */}
@@ -29,7 +61,9 @@ const Header = () => {
               <img src={bell} className="w-6" alt="" />
             </div>
             <div className="flex flex-col text-sm">
-              <span className="font-semibold">John Doe</span>
+              <span className="font-semibold">{`${
+                userData?.firstName || "Yashie"
+              } ${userData?.lastName || "Glory"}`}</span>
               <span className="text-gray-400">Okhlaoma, USA</span>
             </div>
             <img

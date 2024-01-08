@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link,useParams } from "react-router-dom";
-import axios from "axios";  // Import Axios
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 import idea from "../../../assets/images/Idea.svg";
 import date from "../../../assets/images/calendar.svg";
 import clock from "../../../assets/images/clock.svg";
@@ -20,6 +20,7 @@ const Wrapper = () => {
           `https://pm-api.cyclic.app/project/${userId}/projects-and-tasks`
         );
         const data = response.data;
+        console.log("Project Data:", data);
         setProjectData(data);
       } catch (error) {
         console.error("Error fetching project data:", error);
@@ -34,29 +35,34 @@ const Wrapper = () => {
     console.log("Task completed!");
   };
 
-  // Extract projectId from projectData
-  const projectId = projectData?.id || 3;
+  // Extract projects array from projectData
+  const projects = projectData?.projects || [];
+
+  const formatDate = (isoString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(isoString).toLocaleDateString(undefined, options);
+  };
 
   return (
-    <Link to={`${projectId}/tasks`}>
-      <div className="wrapper1">
-        {projectData && (
-          <>
+    <>
+      {projects.map((project) => (
+        <Link key={project._id} to={`${project._id}/tasks`}>
+          <div className="wrapper1">
             <div className="section">
               <img src={idea} alt="idea" />
               <div className="section-text">
                 <h1 id="hr" className="font-bold">
-                  {projectData.title}
+                  {project.title}
                 </h1>
                 <div className="span">
-                  <span>#{projectId}</span>
+                  <span>#{project._id}</span>
                   <span>
-                    Opened 10 days ago by <b>{projectData.creator}</b>
+                    Opened 10 days ago by <b>{project.creator}</b>
                   </span>
                   <div className="action flex gap-2">
-                    <span className="badged">{projectData.status}</span>
+                    <span className="badged">{project.status}</span>
                     <span className="badged1">
-                      {projectData.completed ? "completed" : "not completed"}
+                      {project.completed ? "completed" : "not completed"}
                     </span>
                   </div>
                 </div>
@@ -67,14 +73,14 @@ const Wrapper = () => {
                 <p>Start Date</p>
                 <div className="below flex gap-2 items-center">
                   <img src={date} alt="" />
-                  <span>{projectData.startDate}</span>
+                  <span>{formatDate(project.startDate)}</span>
                 </div>
               </div>
               <div className="date">
                 <p>End Date</p>
                 <div className="below flex gap-2 items-center">
                   <img src={date} alt="" />
-                  <span>{projectData.endDate}</span>
+                  <span>{formatDate(project.endDate)}</span>
                 </div>
               </div>
             </div>
@@ -83,7 +89,7 @@ const Wrapper = () => {
                 <img src={clock} alt="" />
                 <CountdownTimer
                   className="px-4"
-                  initialHours={2}
+                  initialHours={2} // Adjust this value based on your requirements
                   onFinish={handleFinish}
                 />
               </div>
@@ -97,11 +103,12 @@ const Wrapper = () => {
                 <img src={more} alt="" />
               </div>
             </div>
-          </>
-        )}
-      </div>
-    </Link>
+          </div>
+        </Link>
+      ))}
+    </>
   );
+  
 };
 
 export default Wrapper;

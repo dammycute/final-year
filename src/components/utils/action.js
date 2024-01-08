@@ -5,8 +5,8 @@ export const register = async (email, password, firstname, lastname) => {
     email: email,
     firstname: firstname,
     lastname: lastname,
+    designation: designation,
     password: password,
-
   });
 
   // const response = {
@@ -45,9 +45,11 @@ export const login = async (email, password) => {
   // }
 
   const token = response.data.token;
+  const user = response.data._id;
 
   // Save the token to local storage
   localStorage.setItem("token", `Bearer ${token}`);
+  localStorage.setItem("user_id", user);
 
   return {
     type: "LOGIN",
@@ -55,6 +57,7 @@ export const login = async (email, password) => {
       email,
       token,
       // user_id: response.id
+      user
     },
   };
 };

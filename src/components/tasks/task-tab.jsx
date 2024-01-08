@@ -1,14 +1,22 @@
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
-// import ProjectCreate from "../projects/create";
-// import CreateForm from "../projects/create-form";
-import TaskList from "./task-list";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import TasksTimeline from "./TasksTimeline";
 import TasksBoard from "./TasksBoard";
-import { useState, useEffect } from "react";
+import TaskList from "./task-list"; // Import your TaskList component
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
+import Loader from "../utils/loader";
 
 const TaskTab = () => {
+  const { projectId } = useParams(); // Extract projectId from route parameters
+
   const [activePanel, setActivePanel] = useState(null);
   const [activeTab, setActiveTab] = useState(null);
 
@@ -19,7 +27,7 @@ const TaskTab = () => {
       id: "tab-1",
       click: () => {
         setActiveTab("tab-1");
-        setActivePanel(<TaskList />);
+        setActivePanel(<TaskList projectId={projectId} />);
       },
     },
     {
@@ -28,7 +36,7 @@ const TaskTab = () => {
       id: "tab-2",
       click: () => {
         setActiveTab("tab-2");
-        setActivePanel(<TasksBoard />);
+        setActivePanel(<TasksBoard projectId={projectId} />);
       },
     },
     {
@@ -37,7 +45,7 @@ const TaskTab = () => {
       id: "tab-3",
       click: () => {
         setActiveTab("tab-3");
-        setActivePanel(<TasksTimeline id="timeline" />);
+        setActivePanel(<TasksTimeline projectId={projectId} />);
       },
     },
   ];
@@ -51,25 +59,23 @@ const TaskTab = () => {
 
   useEffect(() => {
     setActiveTab("tab-1");
-    setActivePanel(<TaskList id="list" />);
-  }, []);
+    setActivePanel(<TaskList projectId={projectId} />);
+  }, [projectId]);
 
   return (
     <div className="">
       <ul className="tab-container flex gap-10 pt-4 pl-8 pr-16">
-        {tabs.map((tab) => {
-          return (
-            <li
-              key={tab.title}
-              style={activeTab === tab.id ? style : null}
-              onClick={tab.click}
-            >
-              <Link href={tab.href} id={tab.id}>
-                {tab.title}
-              </Link>
-            </li>
-          );
-        })}
+        {tabs.map((tab) => (
+          <li
+            key={tab.title}
+            style={activeTab === tab.id ? style : null}
+            onClick={tab.click}
+          >
+            <Link to={tab.href} id={tab.id}>
+              {tab.title}
+            </Link>
+          </li>
+        ))}
       </ul>
       <hr />
       <div className="contain flex justify-between my-4 items-center pl-8 pr-16">
@@ -86,7 +92,7 @@ const TaskTab = () => {
 
         <div className="buttons flex justify-end gap-6 text-sm">
           <Button className="bg-[#EEF4FB] text-[#036EFF] px-4 text-md">
-            <Link to="/projects/3/tasks/create-task">Add Task</Link>
+            <Link to={`/projects/${projectId}/tasks/create-task`}>Add Task</Link>
           </Button>
           <Button className="bg-[#036EFF]  px-4 text-md">
             <Link to="/invoice">Print Invoice</Link>
@@ -101,4 +107,3 @@ const TaskTab = () => {
 };
 
 export default TaskTab;
-// Sample components for tab content

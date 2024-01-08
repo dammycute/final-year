@@ -1,27 +1,8 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+import Chart from 'chart.js/auto';
 import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
+import { Line } from "react-chartjs-2";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-const LineGraph = () => {
+const LineGraph = ({ chartId }) => {
   const labels = [
     "January",
     "February",
@@ -36,18 +17,18 @@ const LineGraph = () => {
     labels,
     datasets: [
       {
-        label: "Dataset 1",
-        data: labels.map(() => faker.datatype.number({ min: -1000, max: 700 })),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        label: "Target",
+        data: labels.map(() => faker.datatype.number({ min: 10, max: 50 })),
+        borderColor: "#6956E5",
+        backgroundColor: "white",
         yAxisID: "y",
         tension: 0.5,
       },
       {
-        label: "Dataset 2",
-        data: labels.map(() => faker.datatype.number({ min: -1000, max: 500 })),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        label: "Achieved",
+        data: labels.map(() => faker.datatype.number({ min: 10, max: 50 })),
+        borderColor: "#FB896B",
+        backgroundColor: "white",
         tension: 0.5,
         yAxisID: "y1",
       },
@@ -59,28 +40,42 @@ const LineGraph = () => {
       mode: "index",
       intersect: false,
     },
+    layout: {
+      padding: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+      },
+    },
     stacked: false,
     plugins: {
       title: {
         display: true,
-        text: "Chart.js Line Chart - Multi Axis",
+        text: "Performance",
       },
     },
     scales: {
-      y: {
-        type: "linear",
-        display: true,
-        position: "left",
-        max: 1500,
-      },
-      y1: {
-        type: "linear",
-        display: true,
-        position: "right",
-        grid: {
-          drawOnChartArea: false,
+      // y: {
+      //   type: "linear",
+      //   display: true,
+      //   position: "left",
+      //   max: 1500,
+      // },
+      // y1: {
+      //   type: "linear",
+      //   display: true,
+      //   position: "right",
+      //   grid: {
+      //     drawOnChartArea: false,
+      //   },
+      // },
+        x: {
+          display: false,
         },
-      },
+        y: {
+          display: false,
+        },
     },
   };
 

@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import avatar from "../../../assets/images/avatar.png";
 import date from "../../../assets/images/calendar.svg";
@@ -12,8 +11,6 @@ import plus from "../../assets/images/plus.png";
 import attach from "../../assets/images/Attach.png";
 
 import CountdownTimer from "../utils/time";
-// import x from "../../assets/images/x.png";
-// import x from "../../assets/images/x.png";
 
 const PopoverCard = ({ onClose }) => {
   const handleFinish = () => {
