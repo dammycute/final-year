@@ -15,6 +15,14 @@
   margin: 0;
 }
 
+header{
+  /* position: fixed */
+}
+
+.team{
+  position: absolute;
+}
+
 body {
   font-family: "Space Grotesk", sans-serif;
   height: 100vh;

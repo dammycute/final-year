@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Label } from "@/components/ui/label";
 import Select from "react-select";
@@ -53,11 +54,12 @@ const CreateSub = ({ projectId }) => {
       assignee: selectedTeam,
     });
   };
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
-
+  
     if (
       !formData.title ||
       !formData.type ||
@@ -67,39 +69,28 @@ const CreateSub = ({ projectId }) => {
       setError("Please fill in all required fields.");
       return;
     }
-
+  
     setLoading(true);
-
+  
     try {
-      const formDataToSubmit = new FormData();
-
-    // Append JSON data as a blob to the FormData
-    formDataToSubmit.append(
-      'taskData',
-      new Blob([JSON.stringify({ ...formData, projectId })], {
-        type: 'application/json',
-      })
-    );
-
-    // Append each file to the FormData
-    formData.attachments.forEach((file, index) => {
-      formDataToSubmit.append(`file_${index}`, file);
-    });
-
-    const response = await axios.post(
-      `https://pm-api.cyclic.app/project/${projectId}/task`,
-      formDataToSubmit,
-      {
-        headers: {
-          Authorization: token,
-          'Content-Type': 'multipart/form-data',
-        },
-      }
-    ); 
+      const formDataToSubmit = {
+        ...formData,
+        projectId: projectId,
+      };
+  
+      const response = await axios.post(
+        `https://pm-api.cyclic.app/project/${projectId}/task`,
+        formDataToSubmit,
+        {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status === 201) {
-        console.log("Task created successfully!");
-        console.log(response.data)
+        navigate(`/projects/${projectId}/tasks`)
       } else {
         console.error("Failed to create task");
       }
@@ -111,9 +102,9 @@ const CreateSub = ({ projectId }) => {
   };
 
   return (
-    <div className="h-[calc(100vh-8rem)] overflow-y-scroll">
+    <div className="">
       <p className="text-gray-400 font-xl my-4">Tasks / Create Task</p>
-      <div className="bg-white rounded-md">
+      <div className="h-[35rem] overflow-auto bg-white rounded-md">
         <div className="container input-ctn py-6">
           <form onSubmit={handleSubmit}>
             <div className="top flex gap-4">
@@ -230,6 +221,7 @@ const CreateSub = ({ projectId }) => {
                 userId={localStorage.getItem("user_id")}
                 selectedTeam={formData.assignee}
                 onChange={handleTeamChange}
+                className="team"
               />
             </div>
 
@@ -251,6 +243,18 @@ const CreateSub = ({ projectId }) => {
                   { value: "In Review", label: "In Review" },
                   { value: "Completed", label: "Completed" },
                 ]}
+                styles={{
+                  menu: (provided) => ({
+                    ...provided,
+                    top: "auto",
+                    bottom: "100%",
+                  }),
+                  menuList: (provided) => ({
+                    ...provided,
+                    maxHeight: "150px", // Adjust the max height as needed
+                    overflowY: "auto",
+                  }),
+                }}
               />
             </div>
             {error && <p className="text-red-500">{error}</p>}

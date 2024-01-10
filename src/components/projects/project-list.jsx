@@ -11,7 +11,7 @@ const ProjectList = () => {
           <Link to="create">Create</Link>
         </Button>
       </div>
-      <div className="rounded-lg bg-white p-8 h-[calc(100%-10rem)] overflow-y-scroll">
+      <div className="rounded-lg bg-white p-8 h-[35rem] overflow-auto">
         <Wrapper />
       </div>
     </>

@@ -41,6 +41,19 @@ const TeamMemberSelect = ({ userId, selectedTeam, onChange }) => {
       value={selectedOptions}
       onChange={handleChange}
       placeholder="Select team members"
+      className="select"
+      styles={{
+        menu: (provided) => ({
+          ...provided,
+          top: "auto",
+          bottom: "100%",
+        }),
+        menuList: (provided) => ({
+          ...provided,
+          maxHeight: "150px", // Adjust the max height as needed
+          overflowY: "auto",
+        }),
+      }}
     />
   );
 };

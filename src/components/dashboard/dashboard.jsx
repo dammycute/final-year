@@ -11,8 +11,6 @@ function DashboardLayout() {
   const userId = localStorage.getItem("user_id");
   const [taskData, setTaskData] = useState(null);
 
-  
-
   useEffect(() => {
     const fetchTaskData = async () => {
       try {
@@ -40,7 +38,7 @@ function DashboardLayout() {
   const chartData = {
     labels: ['Product 1', 'Product 2', ],
     values: [50, 50],
-    colors: ['#FB896B', '#6956E5',],
+    colors: ['#FB896B', 'limegreen',],
   };
   return (
     <div className="w-full px-4 bg-[#F0F6FF]">

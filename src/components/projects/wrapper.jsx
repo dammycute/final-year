@@ -55,12 +55,12 @@ const Wrapper = () => {
                   {project.title}
                 </h1>
                 <div className="span">
-                  <span>#{project._id}</span>
+                  {/* <span>#{project._id}</span> */}
                   <span>
                     Opened 10 days ago by <b>{project.creator}</b>
                   </span>
                   <div className="action flex gap-2">
-                    <span className="badged">{project.status}</span>
+                    {/* <span className="badged">{project.status}</span> */}
                     <span className="badged1">
                       {project.completed ? "completed" : "not completed"}
                     </span>

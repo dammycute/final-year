@@ -50,6 +50,18 @@ const TeamSelect = ({ backendUrl, onSelectUser }) => {
         onInputChange={handleSearch}
         placeholder="Select a user to add to the project"
         isSearchable
+        styles={{
+          menu: (provided) => ({
+            ...provided,
+            top: "auto",
+            bottom: "100%",
+          }),
+          menuList: (provided) => ({
+            ...provided,
+            maxHeight: "150px", // Adjust the max height as needed
+            overflowY: "auto",
+          }),
+        }}
       />
     </div>
   );

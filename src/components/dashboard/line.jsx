@@ -19,16 +19,16 @@ const LineGraph = ({ chartId }) => {
       {
         label: "Target",
         data: labels.map(() => faker.datatype.number({ min: 10, max: 50 })),
-        borderColor: "#6956E5",
-        backgroundColor: "white",
+        borderColor: "#FB896B",
+        backgroundColor: "#FB896B",
         yAxisID: "y",
         tension: 0.5,
       },
       {
         label: "Achieved",
         data: labels.map(() => faker.datatype.number({ min: 10, max: 50 })),
-        borderColor: "#FB896B",
-        backgroundColor: "white",
+        borderColor: "limegreen",
+        backgroundColor: "limegreen",
         tension: 0.5,
         yAxisID: "y1",
       },
@@ -56,20 +56,6 @@ const LineGraph = ({ chartId }) => {
       },
     },
     scales: {
-      // y: {
-      //   type: "linear",
-      //   display: true,
-      //   position: "left",
-      //   max: 1500,
-      // },
-      // y1: {
-      //   type: "linear",
-      //   display: true,
-      //   position: "right",
-      //   grid: {
-      //     drawOnChartArea: false,
-      //   },
-      // },
         x: {
           display: false,
         },

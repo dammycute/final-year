@@ -4,9 +4,6 @@ const TaskList = ({ id }) => {
   return (
     <div id={id} className="px-6">
       <TaskDetail />
-      <TaskDetail />
-      <TaskDetail />
-      <TaskDetail />
     </div>              
   );
 };

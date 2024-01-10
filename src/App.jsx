@@ -25,6 +25,7 @@ import ProtectedRoute from "./components/utils/protect.jsx";
 function App() {
 
   return (
+    <Provider store={store}>
       <Router>
         <Routes>
           <Route exact path="/register" element={<Register />} />
@@ -59,6 +60,7 @@ function App() {
           {/* </ProtectedRoute> */}
         </Routes>
       </Router>
+    </Provider>
   );
 }
 
