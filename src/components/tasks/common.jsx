@@ -72,7 +72,7 @@ const CommonComponent = () => {
             <div className="time badged1">
               <img src={clock} alt="" />
               <DaysCounter
-                days={project.duration}
+                days={project?.duration}
                 onFinish={handleFinish}
               />
             </div>
