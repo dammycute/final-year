@@ -116,7 +116,7 @@ const validateForm = () => {
 
   return (
     <div>
-      <div className="ctn h-screen justify-center flex flex-col bg-gray-100">
+      <div className="ctn h-[46rem] overflow-auto justify-center flex flex-col bg-gray-100">
         <div className="from-wrapper w-full max-w-xl m-auto shadow-default bg-white rounded-lg border border-primary py-10 px-1">
           {/* <div className="logo-container">
                         <img src={logo} alt="Logo" className="w-20 h-20" />

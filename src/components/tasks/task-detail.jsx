@@ -71,7 +71,7 @@ const TaskDetail = () => {
                   {task.title}
                 </h1>
                 <div className="span">
-                  <span>{task._id}</span>
+                  {/* <span>{task._id}</span> */}
                   <span>
                     Created by <b>Yash Ghori</b>
                   </span>

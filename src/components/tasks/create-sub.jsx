@@ -18,7 +18,7 @@ const CreateSub = ({ projectId }) => {
     attachments: [],
     projectId: projectId,
     assignee: [],
-    status: "Not Started",
+    status: "",
   });
 
   const [loading, setLoading] = useState(false);
