@@ -21,6 +21,7 @@ import PasswordSetting from "./components/settings/PasswordSetting.jsx";
 import Notification from "./components/settings/Notification.jsx";
 import ProjectLayout from "./components/projects/ProjectLayout.jsx";
 import ProtectedRoute from "./components/utils/protect.jsx";
+import Invoice from "./components/tasks/invoice.jsx";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/register" element={<Register />} />
+          <Route exact path="/invoice" element={<Invoice />} />
           <Route exact path="/activate" element={<Activation />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/set-password" element={<SetPassword />} />

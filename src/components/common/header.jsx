@@ -64,7 +64,7 @@ const Header = () => {
               <span className="font-semibold">{`${
                 userData?.firstName || "Yashie"
               } ${userData?.lastName || "Glory"}`}</span>
-              <span className="text-gray-400">Okhlaoma, USA</span>
+              
             </div>
             <img
               src={avatar}

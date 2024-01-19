@@ -19,7 +19,7 @@ const TaskDetail = () => {
 
   const userId = localStorage.getItem('user_id');
 
-  useEffect(() => {
+   useEffect(() => {
     const fetchTaskData = async () => {
       try {
         const response = await axios.get(

@@ -15,12 +15,54 @@
   margin: 0;
 }
 
+.invoice h1{
+  font-weight: 700;
+  font-size: 28px;
+}
+
+.invoice p{
+  font-size: 16px;
+}
+
+.invoice{
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.invoice-footer, .bord{
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
+}
+
+.color{
+  padding-block: 1rem;
+  background-color: #036EFF;
+}
+
+.money{
+  /* float: right; */
+  /* border-bottom: 1px solid black; */
+}
+
+.border{
+  /* border-bottom: 1px solid black; */
+}
+
+.money .large{
+  font-size: 2em;
+}
+
+.money .small{
+  font-size: 14px;
+
+}
+
 header{
   /* position: fixed */
 }
 
 .team{
-  position: absolute;
+  /* position: absolute; */
 }
 
 body {

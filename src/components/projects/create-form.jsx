@@ -116,8 +116,9 @@ const CreateForm = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setprojectStatus("Failed to create task");
-    } setLoading(false)
+      if (error.response && error.response.data && error.response.data.error) {
+      setprojectStatus(error.response.data.error);
+    }} setLoading(false)
   };
 
   return (

@@ -8,7 +8,7 @@ import {
   Plus,
 } from "./TaskImages";
 
-const TaskBox = ({ title, details, attachments, messages, duration }) => {
+const TaskBox = ({ title, description, duration }) => {
   return (
     <div className="pt-3 p-4 pr-8 shadow-md rounded-lg">
       <div className="flex flex-col">
@@ -19,16 +19,16 @@ const TaskBox = ({ title, details, attachments, messages, duration }) => {
             <p>{duration} days</p>
           </div>
         </div>
-        <p className="my-4">{details}</p>
+        <p className="my-4">{description}</p>
         <div className="flex items-center justify-between">
           <div className="flex gap-3">
             <div className="flex gap-2">
               <img src={Attachment} alt="attachment" />
-              <p>{attachments}</p>
+              <p>7</p>
             </div>
             <div className="flex gap-4">
               <img src={Message} alt="message" />
-              <p>{messages}</p>
+              <p>3</p>
             </div>
           </div>
           <div className="flex items-center gap-1">

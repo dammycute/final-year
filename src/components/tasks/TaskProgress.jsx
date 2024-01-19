@@ -1,7 +1,7 @@
 import { Menu, Plus } from "./TaskImages";
 import TaskBox from "./TaskBox";
 
-const TaskProgress = ({ title, data }) => {
+const TaskProgress = ({ title, data}) => {
   return (
     <div className="shadow-md rounded-lg">
       <div className="bg-lightblue py-3 px-4 text-lg font-bold flex items-center justify-between">
@@ -16,9 +16,9 @@ const TaskProgress = ({ title, data }) => {
           <TaskBox
             key={dt.title}
             title={dt.title}
-            details={dt.details}
-            attachments={dt.attachments}
-            messages={dt.messages}
+            details={dt.description}
+            // attachments={dt.attachments}
+            // messages={dt.messages}
             duration={dt.duration}
           />
         ))}

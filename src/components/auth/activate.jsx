@@ -65,9 +65,10 @@ const Activation = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setActivationStatus("Activation failed");
+      if (error.response && error.response.data && error.response.data.error) {
+      setActivationStatus(error.response.data.error);
     
-    }setLoading(false)
+    }}setLoading(false)
   };
 
   return (

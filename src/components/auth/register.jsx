@@ -108,10 +108,11 @@ const validateForm = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setRegistrationStatus("Registration failed");
+      if (error.response && error.response.data && error.response.data.error) {
+      setRegistrationStatus(error.response.data.error);
       setNormal("destructive");
       // return redirect('/activation');
-    }setLoading(false)
+    }}setLoading(false)
   };
 
   return (

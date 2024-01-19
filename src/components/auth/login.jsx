@@ -66,8 +66,9 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      setLoginStatus("Login failed. Please try again later.");
-    }
+      if (error.response && error.response.data && error.response.data.msg) {
+      setLoginStatus(error.response.data.msg);
+    }}
     setLoading(false);
   };
 

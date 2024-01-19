@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Label } from "@/components/ui/label";
 import Select from "react-select";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Loader from "../utils/loader";
 import TeamMemberSelect from "./assignee";
 
@@ -23,7 +24,10 @@ const CreateSub = ({ projectId }) => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [normal, setNormal] = useState("default");
   const token = localStorage.getItem("token");
+  const [taskStatus, setTaskStatus] = useState("");
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,11 +96,13 @@ const CreateSub = ({ projectId }) => {
       if (response.status === 201) {
         navigate(`/projects/${projectId}/tasks`)
       } else {
-        console.error("Failed to create task");
+        setTaskStatus("Task Successfully Created")
       }
     } catch (error) {
       console.error("Error:", error);
-    } finally {
+      if (error.response && error.response.data && error.response.data.error) {
+        setTaskStatus(error.response.data.error);
+    }} finally {
       setLoading(false);
     }
   };
@@ -180,17 +186,6 @@ const CreateSub = ({ projectId }) => {
                 />
               </div>
 
-              {/* <div className="">
-                <input
-                  id="projectId"
-                  name="projectId"
-                  value={formData.projectId}
-                  type="hidden"
-                  className="mt-1 px-3 py-2 bg-white rounded-md border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1"
-                  onChange={handleInputChange}
-                />
-              </div> */}
-
               <div className="input">
                 <Label htmlFor="type">Cost</Label>
                 <input
@@ -214,7 +209,7 @@ const CreateSub = ({ projectId }) => {
                 />
               </div>
             </div>
-            {/* <div className="flex w-full  mt-8 gap-6"> */}
+            
             <div className="w-full mt-6">
               <Label>Assign Team Members</Label>
               <TeamMemberSelect
@@ -268,6 +263,12 @@ const CreateSub = ({ projectId }) => {
               </button>
             </div>
           </form>
+          {taskStatus && (
+                  <Alert variant={normal}>
+                    <AlertTitle>Status:</AlertTitle>
+                    <AlertDescription>{taskStatus}</AlertDescription>
+                  </Alert>
+                )}
         </div>
       </div>
     </div>
