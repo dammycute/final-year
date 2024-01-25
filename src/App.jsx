@@ -4,7 +4,7 @@ import Activation from "./components/auth/activate";
 import Dashboard from "./components/dashboard/dashboard.jsx";
 import DashboardLayout from "./components/common/dashboardLayout.jsx";
 import Login from "./components/auth/login";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import ProjectList from "./components/projects/project-list";
 import ProjectCreate from "./components/projects/create";
 import CreateTask from "./components/tasks/create-task";
@@ -21,16 +21,30 @@ import PasswordSetting from "./components/settings/PasswordSetting.jsx";
 import Notification from "./components/settings/Notification.jsx";
 import ProjectLayout from "./components/projects/ProjectLayout.jsx";
 import ProtectedRoute from "./components/utils/protect.jsx";
-import Invoice from "./components/tasks/invoice.jsx";
 
 function App() {
+
+  const isAuthenticated = localStorage.getItem("user_id") && localStorage.getItem("token");
+
+  if (!isAuthenticated) {
+    return (
+      <Provider store={store}>
+        <Router>
+          <Navigate to="/register" replace />
+          <Routes>
+            <Route path="/register" element={<Register />} />
+            {/* Add other routes as needed */}
+          </Routes>
+        </Router>
+      </Provider>
+    );
+  }
 
   return (
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/invoice" element={<Invoice />} />
+          {/* <Route exact path="/register" element={<Register />} /> */}
           <Route exact path="/activate" element={<Activation />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/set-password" element={<SetPassword />} />

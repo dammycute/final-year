@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Dummy from "./command-me";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import CommandOutput from "./command-output";
 import axios from "axios";
 import { useState } from "react";
@@ -79,6 +79,9 @@ const CreateForm = () => {
     setError(null); // Clear previous errors
   };
 
+  const navigate = useNavigate();
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -108,7 +111,10 @@ const CreateForm = () => {
 
       if (response.status === 201) {
         setFormData({ ...formData });
+        const project = response.data.project
+        const projectId = project._id
         setprojectStatus("Project Successfully Created")
+        navigate(`/projects/${projectId}/tasks`)
         
 
       } else {

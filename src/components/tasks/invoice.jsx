@@ -7,26 +7,29 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
 
   const handleDownloadPDF = () => {
     if (!invoiceRef.current) return;
-  
-    html2canvas(invoiceRef.current).then((canvas) => {
-      const pdf = new jsPDF({
-        unit: "px",
-        format: "a4",
-      });
-  
+
+    const input = invoiceRef.current;
+    const pdf = new jsPDF({
+      scale: 1,
+      unit: "px",
+      format: "a4",
+    });
+
+    html2canvas(input, {
+      scrollY: -window.scrollY,
+    }).then((canvas) => {
       const imgData = canvas.toDataURL("image/png");
       const imgWidth = pdf.internal.pageSize.getWidth();
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-  
+
       pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
       pdf.save("invoice.pdf");
     });
   };
-  
 
   return (
     <>
-      <div className="invoice h-[35rem] overflow-auto" ref={invoiceRef}>
+      <div className="invoice h-[500px] overflow-auto" ref={invoiceRef}>
         <div className="container py-3">
           <h1 className="">Invoice</h1>
           <p className="client">
@@ -97,7 +100,6 @@ const tasks = [
   { task: "Electrical Wiring and Configuration", rate: 4000 },
   { task: "Software Integration", rate: 3000 },
   { task: "Safety Inspections and Testing", rate: 2500 },
-  { task: "Mechanical Installation", rate: 8000 },
   { task: "Electrical Wiring and Configuration", rate: 4000 },
   { task: "Software Integration", rate: 3000 },
   { task: "Safety Inspections and Testing", rate: 2500 },

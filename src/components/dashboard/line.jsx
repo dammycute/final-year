@@ -1,5 +1,5 @@
 import Chart from 'chart.js/auto';
-import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
+// import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
 import { Line } from "react-chartjs-2";
 
 const LineGraph = ({ chartId }) => {
@@ -67,7 +67,7 @@ const LineGraph = ({ chartId }) => {
 
   return (
     <div>
-      <Line options={options} className="canvas" data={data} />
+      {/* <Line options={options} className="canvas" data={data} /> */}
     </div>
   );
 };

@@ -1,3 +1,5 @@
+// TaskDetail.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -5,21 +7,18 @@ import idea from '../../../assets/images/Idea.svg';
 import clock from '../../../assets/images/clock.svg';
 import avatar from '../../../assets/images/avatar.png';
 import DaysCounter from '../utils/months-count';
-import PopoverCard from './popover';
+import PopoverCard from './popover'; // Import the updated PopoverCard
 
 const TaskDetail = () => {
   const { projectId } = useParams();
-  const handleFinish = () => {
-    // Logic to execute when the countdown finishes
-    console.log('Task completed!');
-  };
 
   const [isPopoverVisible, setPopoverVisible] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
   const [taskData, setTaskData] = useState(null);
 
   const userId = localStorage.getItem('user_id');
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchTaskData = async () => {
       try {
         const response = await axios.get(
@@ -38,7 +37,6 @@ const TaskDetail = () => {
 
   const tasks = taskData?.tasks || [];
 
-  // Filter tasks based on the projectId from the URL
   const filteredTasks = tasks.filter((task) => task.projectId === projectId);
 
   const formatDate = (isoString) => {
@@ -46,8 +44,8 @@ const TaskDetail = () => {
     return new Date(isoString).toLocaleDateString(undefined, options);
   };
 
-  const handleTaskDetailClick = () => {
-    // Toggle the visibility of the popover when the task detail is clicked
+  const handleTaskDetailClick = (selectedTask) => {
+    setSelectedTask(selectedTask);
     setPopoverVisible(!isPopoverVisible);
   };
 
@@ -60,7 +58,7 @@ const TaskDetail = () => {
       {filteredTasks.map((task) => (
         <div
           className="contain bg-white mt-2 rounded-lg"
-          onClick={handleTaskDetailClick}
+          onClick={() => handleTaskDetailClick(task)}
           key={task._id}
         >
           <div className="wrapper1 px-8">
@@ -71,9 +69,8 @@ const TaskDetail = () => {
                   {task.title}
                 </h1>
                 <div className="span">
-                  {/* <span>{task._id}</span> */}
                   <span>
-                    Created by <b>Yash Ghori</b>
+                    Created by <b>{task.owner}</b>
                   </span>
                   <div className="action flex gap-4">
                     <span className="badged">{task.status}</span>
@@ -86,7 +83,7 @@ const TaskDetail = () => {
             <div className="section gap-8">
               <div className="time badged1">
                 <img src={clock} alt="" />
-                <DaysCounter days={task.duration} onFinish={handleFinish} />
+                <DaysCounter days={task.duration} />
               </div>
               <div className="profile">
                 <img src={avatar} alt="" />
@@ -96,7 +93,7 @@ const TaskDetail = () => {
         </div>
       ))}
 
-      {isPopoverVisible && <PopoverCard onClose={closePopover} />}
+      {isPopoverVisible && <PopoverCard task={selectedTask} onClose={closePopover} />}
     </>
   );
 };

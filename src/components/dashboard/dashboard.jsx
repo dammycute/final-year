@@ -60,7 +60,7 @@ function DashboardLayout() {
           <h2 className="font-bold pt-4 text-[40px]">{tasks}</h2>
         </div>
 
-      <div className="unit three rounded-md"><LineGraph/></div>
+      {/* <div className="unit three rounded-md"><LineGraph/></div> */}
 
         <div className="unit four rounded-md">
         <div className="flex gap-4 items-center">

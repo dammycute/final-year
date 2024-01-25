@@ -57,7 +57,7 @@ const Wrapper = () => {
                 <div className="span">
                   {/* <span>#{project._id}</span> */}
                   <span>
-                    Opened 10 days ago by <b>{project.creator}</b>
+                    Opened 10 days ago by <b>{project.projectManagerEmail}</b>
                   </span>
                   <div className="action flex gap-2">
                     {/* <span className="badged">{project.status}</span> */}
