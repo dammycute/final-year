@@ -108,8 +108,8 @@ const validateForm = () => {
       }
     } catch (error) {
       console.error("Error:", error);
-      if (error.response && error.response.data && error.response.data.error) {
-      setRegistrationStatus(error.response.data.error);
+      if (error.response && error.response.data && error.response.data.msg) {
+        setRegistrationStatus(error.response.data.msg);
       setNormal("destructive");
       // return redirect('/activation');
     }}setLoading(false)

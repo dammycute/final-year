@@ -33,6 +33,7 @@ function App() {
           <Navigate to="/register" replace />
           <Routes>
             <Route path="/register" element={<Register />} />
+          <Route exact path="/login" element={<Login />} />
             {/* Add other routes as needed */}
           </Routes>
         </Router>
@@ -46,7 +47,6 @@ function App() {
         <Routes>
           {/* <Route exact path="/register" element={<Register />} /> */}
           <Route exact path="/activate" element={<Activation />} />
-          <Route exact path="/login" element={<Login />} />
           <Route exact path="/set-password" element={<SetPassword />} />
           <Route exact path="/set-new-password" element={<SetPassword />} />
           {/* <Route exact path="/set-password" element={<Recov} />  */}

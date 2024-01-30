@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const register = async (email, password, firstname, lastname) => {
+export const register = async (email, password, firstname, lastname, designation) => {
   const response = await axios.post("https://pm-api.cyclic.app/user/register/", {
     email: email,
     firstname: firstname,
@@ -8,12 +8,6 @@ export const register = async (email, password, firstname, lastname) => {
     designation: designation,
     password: password,
   });
-
-  // const response = {
-  //   email: "damilola@gmail.com",
-  //   token:"Bearer gfyuygdifygsyfgwygrfrhvyfirgyhsfgh",
-  //   user_id:12653765,
-  // }
 
   const token = response.data.token;
   const user = response.data._id;
@@ -46,6 +40,7 @@ export const login = async (email, password) => {
 
   const token = response.data.token;
   const user = response.data._id;
+  const msg = response.data.msg
 
   // Save the token to local storage
   localStorage.setItem("token", `Bearer ${token}`);
@@ -56,6 +51,7 @@ export const login = async (email, password) => {
     payload: {
       email,
       token,
+      msg,
       // user_id: response.id
       user
     },
