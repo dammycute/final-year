@@ -60,6 +60,7 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   // Remove the token from local storage
+  localStorage.removeItem("user_id");
   localStorage.removeItem("token");
 
   return {

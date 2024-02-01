@@ -30,7 +30,7 @@ const PopoverCard = ({ task, onClose }) => {
   }
 
   const formatDate = (isoString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
     return new Date(isoString).toLocaleDateString(undefined, options);
   };
 

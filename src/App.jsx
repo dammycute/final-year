@@ -4,7 +4,12 @@ import Activation from "./components/auth/activate";
 import Dashboard from "./components/dashboard/dashboard.jsx";
 import DashboardLayout from "./components/common/dashboardLayout.jsx";
 import Login from "./components/auth/login";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import ProjectList from "./components/projects/project-list";
 import ProjectCreate from "./components/projects/create";
 import CreateTask from "./components/tasks/create-task";
@@ -23,59 +28,51 @@ import ProjectLayout from "./components/projects/ProjectLayout.jsx";
 import ProtectedRoute from "./components/utils/protect.jsx";
 
 function App() {
+  const isAuthenticated =
+    localStorage.getItem("user_id") && localStorage.getItem("token");
 
-  const isAuthenticated = localStorage.getItem("user_id") && localStorage.getItem("token");
+    const navigate = useNavigate();
 
   if (!isAuthenticated) {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Navigate to="/register" replace />
-          <Routes>
-            <Route path="/register" element={<Register />} />
-          <Route exact path="/login" element={<Login />} />
-            {/* Add other routes as needed */}
-          </Routes>
-        </Router>
-      </Provider>
-    );
+    // Redirect to /register or /login if not authenticated
+    navigate("/register", { replace: true });
+    navigate("/login", { replace: true });
   }
 
   return (
     <Provider store={store}>
-      <Router>
+      
         <Routes>
-          {/* <Route exact path="/register" element={<Register />} /> */}
-          <Route exact path="/activate" element={<Activation />} />
-          <Route exact path="/set-password" element={<SetPassword />} />
-          <Route exact path="/set-new-password" element={<SetPassword />} />
-          {/* <Route exact path="/set-password" element={<Recov} />  */}
-          <Route exact path="/recover-password" element={<RecoverEmail />} />
-          <Route exact path="/recover-password-otp" element={<RecoverCode />} />
+          {/* Public routes */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/activate" element={<Activation />} />
+          <Route path="/set-password" element={<SetPassword />} />
+          <Route path="/recover-password" element={<RecoverEmail />} />
+          <Route path="/recover-password-otp" element={<RecoverCode />} />
 
-          <Route exact path="/" element={<DashboardLayout />}>
-            <Route index element={<Dashboard />} />
+          {/* Protected routes */}
+          {isAuthenticated && (
+            <Route path="/" element={<DashboardLayout />}>
+              <Route index element={<Dashboard />} />
 
-            <Route exact path="settings" element={<SettingsLayout />}>
-              <Route index element={<GeneralSettings />} />
-              <Route path="password" element={<PasswordSetting />} />
-              <Route path="notification" element={<Notification />} />
-            </Route>
+              <Route path="settings" element={<SettingsLayout />}>
+                <Route index element={<GeneralSettings />} />
+                <Route path="password" element={<PasswordSetting />} />
+                <Route path="notification" element={<Notification />} />
+              </Route>
 
-              <Route exact path="projects" element={<ProjectLayout />}>
+              <Route path="projects" element={<ProjectLayout />}>
                 <Route index element={<ProjectList />} />
                 <Route path="create" element={<ProjectCreate />} />
-                <Route exact path=":projectId/tasks">
+                <Route path=":projectId/tasks">
                   <Route index element={<TaskPage />} />
                   <Route path="create-task" element={<CreateTask />} />
                 </Route>
               </Route>
-
-              {/* <Route exact path="/task-" element={<TaskList/>} /> */}
             </Route>
-          {/* </ProtectedRoute> */}
+          )}
         </Routes>
-      </Router>
     </Provider>
   );
 }

@@ -1,5 +1,5 @@
 import Chart from 'chart.js/auto';
-// import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
+import { faker } from "https://cdn.skypack.dev/@faker-js/faker";
 import { Line } from "react-chartjs-2";
 
 const LineGraph = ({ chartId }) => {
@@ -13,12 +13,17 @@ const LineGraph = ({ chartId }) => {
     "July",
   ];
 
+  const targetData = [30, 35, 40, 45, 40, 38, 42];
+
+  // Replace this array with your actual achieved data
+  const achievedData = [28, 32, 37, 42, 38, 36, 40];
+
   const data = {
     labels,
     datasets: [
       {
         label: "Target",
-        data: labels.map(() => faker.datatype.number({ min: 10, max: 50 })),
+        data: targetData,
         borderColor: "#FB896B",
         backgroundColor: "#FB896B",
         yAxisID: "y",
@@ -26,7 +31,7 @@ const LineGraph = ({ chartId }) => {
       },
       {
         label: "Achieved",
-        data: labels.map(() => faker.datatype.number({ min: 10, max: 50 })),
+        data: achievedData,
         borderColor: "limegreen",
         backgroundColor: "limegreen",
         tension: 0.5,
@@ -67,7 +72,7 @@ const LineGraph = ({ chartId }) => {
 
   return (
     <div>
-      {/* <Line options={options} className="canvas" data={data} /> */}
+      <Line options={options} className="canvas" data={data} />
     </div>
   );
 };

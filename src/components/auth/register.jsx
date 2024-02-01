@@ -203,7 +203,7 @@ const validateForm = () => {
                   <button
                     type="submit"
                     className="bg-black w-full text-white rounded-lg px-12 max-w-full my-5 py-2"
-                    disabled={loading}
+                    // disabled={loading}
                   >
                     {loading ? <Loader /> : "Create Account"}
                   </button>
