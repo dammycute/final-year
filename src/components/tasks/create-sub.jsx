@@ -18,7 +18,7 @@ const CreateSub = ({ projectId }) => {
     otherExpenses: 0,
     attachments: [],
     projectId: projectId,
-    assignee: [],
+    assignees: [],
     status: "",
   });
 
@@ -55,7 +55,7 @@ const CreateSub = ({ projectId }) => {
   const handleTeamChange = (selectedTeam) => {
     setFormData({
       ...formData,
-      assignee: selectedTeam,
+      assignees: selectedTeam,
     });
   };
   const navigate = useNavigate();
@@ -214,7 +214,7 @@ const CreateSub = ({ projectId }) => {
               <Label>Assign Team Members</Label>
               <TeamMemberSelect
                 userId={localStorage.getItem("user_id")}
-                selectedTeam={formData.assignee}
+                selectedTeam={formData.assignees}
                 onChange={handleTeamChange}
                 className="team"
               />

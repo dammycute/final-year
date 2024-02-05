@@ -14,11 +14,11 @@ const TaskComponent = ({ title, startdate, enddate, duration, day }) => {
         <div className="flex gap-4">
           <img src={Calendar} alt="calender" />
           <p>
-            {enddate} - {startdate}
+            {enddate}
           </p>
         </div>
       </div>
-      <div className="flex items-center">
+      {/* <div className="flex items-center">
         <div className="flex">
           <img src={James} alt="" className="team-member" />
           <img src={Karen} alt="" className="team-member" />
@@ -29,7 +29,7 @@ const TaskComponent = ({ title, startdate, enddate, duration, day }) => {
           </div>
         </div>
         <img src={VerticalBar} alt="verticalbar" />
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -70,7 +70,7 @@ const TaskDetail = () => {
                 </h1>
                 <div className="span">
                   <span>
-                    Created by <b>{task.owner}</b>
+                    Created by <b>{task.ownerEmail}</b>
                   </span>
                   <div className="action flex gap-4">
                     <span className="badged">{task.status}</span>

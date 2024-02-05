@@ -8,7 +8,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useNavigate,
+  Navigate,
 } from "react-router-dom";
 import ProjectList from "./components/projects/project-list";
 import ProjectCreate from "./components/projects/create";
@@ -28,51 +28,59 @@ import ProjectLayout from "./components/projects/ProjectLayout.jsx";
 import ProtectedRoute from "./components/utils/protect.jsx";
 
 function App() {
-  const isAuthenticated =
-    localStorage.getItem("user_id") && localStorage.getItem("token");
 
-    const navigate = useNavigate();
+  const isAuthenticated = localStorage.getItem("user_id") && localStorage.getItem("token");
 
   if (!isAuthenticated) {
-    // Redirect to /register or /login if not authenticated
-    navigate("/register", { replace: true });
-    navigate("/login", { replace: true });
+    return (
+      <Provider store={store}>
+        <Router>
+          <Navigate to="/login" replace />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            {/* Add other routes as needed */}
+          </Routes>
+        </Router>
+      </Provider>
+    );
   }
 
   return (
     <Provider store={store}>
-      
+      <Router>
         <Routes>
-          {/* Public routes */}
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/activate" element={<Activation />} />
-          <Route path="/set-password" element={<SetPassword />} />
-          <Route path="/recover-password" element={<RecoverEmail />} />
-          <Route path="/recover-password-otp" element={<RecoverCode />} />
+          {/* <Route exact path="/register" element={<Register />} /> */}
+          <Route exact path="/activate" element={<Activation />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/set-password" element={<SetPassword />} />
+          <Route exact path="/set-new-password" element={<SetPassword />} />
+          {/* <Route exact path="/set-password" element={<Recov} />  */}
+          <Route exact path="/recover-password" element={<RecoverEmail />} />
+          <Route exact path="/recover-password-otp" element={<RecoverCode />} />
 
-          {/* Protected routes */}
-          {isAuthenticated && (
-            <Route path="/" element={<DashboardLayout />}>
-              <Route index element={<Dashboard />} />
+          <Route exact path="/" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
 
-              <Route path="settings" element={<SettingsLayout />}>
-                <Route index element={<GeneralSettings />} />
-                <Route path="password" element={<PasswordSetting />} />
-                <Route path="notification" element={<Notification />} />
-              </Route>
+            <Route exact path="settings" element={<SettingsLayout />}>
+              <Route index element={<GeneralSettings />} />
+              <Route path="password" element={<PasswordSetting />} />
+              <Route path="notification" element={<Notification />} />
+            </Route>
 
-              <Route path="projects" element={<ProjectLayout />}>
+              <Route exact path="projects" element={<ProjectLayout />}>
                 <Route index element={<ProjectList />} />
                 <Route path="create" element={<ProjectCreate />} />
-                <Route path=":projectId/tasks">
+                <Route exact path=":projectId/tasks">
                   <Route index element={<TaskPage />} />
                   <Route path="create-task" element={<CreateTask />} />
                 </Route>
               </Route>
+
+              {/* <Route exact path="/task-" element={<TaskList/>} /> */}
             </Route>
-          )}
+          {/* </ProtectedRoute> */}
         </Routes>
+      </Router>
     </Provider>
   );
 }

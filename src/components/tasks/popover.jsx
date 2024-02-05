@@ -86,8 +86,8 @@ const PopoverCard = ({ task, onClose }) => {
                 <span>Owner</span>
               </div>
               <div className="right people">
-                <img src={avatar} alt="" />
-                <span>{task.owner}</span>
+                {/* <img src={avatar} alt="" /> */}
+                <span>{task.ownerEmail}</span>
               </div>
             </div>
           </div>
@@ -99,8 +99,8 @@ const PopoverCard = ({ task, onClose }) => {
                 <span>Assignee</span>
               </div>
               <div className="right people">
-                <img src={avatar} alt="" />
-                <span>{task.assignee}</span>
+                {/* <img src={avatar} alt="" /> */}
+                <span>{task.assignees}</span>
               </div>
             </div>
           </div>
