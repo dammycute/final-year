@@ -15,6 +15,7 @@ const TaskDetail = () => {
   const [isPopoverVisible, setPopoverVisible] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [taskData, setTaskData] = useState(null);
+  const token = localStorage.getItem("token");
 
   const userId = localStorage.getItem("user_id");
 
