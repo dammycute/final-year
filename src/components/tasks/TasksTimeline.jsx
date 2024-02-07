@@ -43,7 +43,7 @@ while (number < numberOfDays) {
 const TasksTimeline = () => {
   const { projectId } = useParams();
   const [taskData, setTaskData] = useState(null);
-
+  const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
 
   useEffect(() => {

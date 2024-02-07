@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import PieChart from "./pie";
 
 function DashboardLayout() {
+  const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
   const [taskData, setTaskData] = useState(null);
 

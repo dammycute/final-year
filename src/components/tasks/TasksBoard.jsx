@@ -5,6 +5,7 @@ import TaskProgress from "./TaskProgress";
 
 const TasksBoard = () => {
   const [taskData, setTaskData] = useState(null);
+  const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
   const { projectId } = useParams();
 

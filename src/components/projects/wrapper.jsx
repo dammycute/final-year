@@ -10,6 +10,7 @@ import avatar from "../../../assets/images/avatar.png";
 import CountdownTimer from "../utils/time";
 
 const Wrapper = () => {
+  const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
   const [projectData, setProjectData] = useState(null);
 

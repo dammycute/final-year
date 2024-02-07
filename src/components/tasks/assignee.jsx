@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const TeamMemberSelect = ({ userId, selectedTeam, onChange }) => {
   const [projectData, setProjectData] = useState(null);
+  const token = localStorage.getItem("token");
   const { projectId } = useParams();
 
   useEffect(() => {
@@ -31,10 +32,17 @@ const TeamMemberSelect = ({ userId, selectedTeam, onChange }) => {
   }, [userId]);
 
   // Extract team emails from the projectData
-  const teamEmails = projectData?.teamMembers.flatMap(project => project) || [];
+  const teamEmails =
+    projectData?.teamMembers.flatMap((project) => project) || [];
 
-  const teamOptions = teamEmails.map((email) => ({ value: email, label: email }));
-  const selectedOptions = selectedTeam.map((email) => ({ value: email, label: email }));
+  const teamOptions = teamEmails.map((email) => ({
+    value: email,
+    label: email,
+  }));
+  const selectedOptions = selectedTeam.map((email) => ({
+    value: email,
+    label: email,
+  }));
 
   const handleChange = (selectedOptions) => {
     const selectedTeam = selectedOptions.map((option) => option.value);
