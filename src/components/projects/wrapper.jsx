@@ -17,7 +17,12 @@ const Wrapper = () => {
     const fetchProjectData = async () => {
       try {
         const response = await axios.get(
-          `https://pm-api.cyclic.app/project/${userId}/projects-and-tasks`
+          `https://pm-api.cyclic.app/project/${userId}/projects-and-tasks`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
         );
         const data = response.data;
         console.log("Project Data:", data);

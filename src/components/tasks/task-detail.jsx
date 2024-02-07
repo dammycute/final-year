@@ -1,13 +1,13 @@
 // TaskDetail.jsx
 
-import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-import idea from '../../../assets/images/Idea.svg';
-import clock from '../../../assets/images/clock.svg';
-import avatar from '../../../assets/images/avatar.png';
-import DaysCounter from '../utils/months-count';
-import PopoverCard from './popover'; // Import the updated PopoverCard
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import idea from "../../../assets/images/Idea.svg";
+import clock from "../../../assets/images/clock.svg";
+import avatar from "../../../assets/images/avatar.png";
+import DaysCounter from "../utils/months-count";
+import PopoverCard from "./popover"; // Import the updated PopoverCard
 
 const TaskDetail = () => {
   const { projectId } = useParams();
@@ -16,19 +16,25 @@ const TaskDetail = () => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [taskData, setTaskData] = useState(null);
 
-  const userId = localStorage.getItem('user_id');
+  const userId = localStorage.getItem("user_id");
 
   useEffect(() => {
     const fetchTaskData = async () => {
       try {
         const response = await axios.get(
-          `https://pm-api.cyclic.app/project/${userId}/projects-and-tasks`
+          `https://pm-api.cyclic.app/project/${userId}/projects-and-tasks`,
+
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
         );
         const data = response.data;
-        console.log('Task Data:', data);
+        console.log("Task Data:", data);
         setTaskData(data);
       } catch (error) {
-        console.error('Error fetching project data:', error);
+        console.error("Error fetching project data:", error);
       }
     };
 
@@ -40,7 +46,7 @@ const TaskDetail = () => {
   const filteredTasks = tasks.filter((task) => task.projectId === projectId);
 
   const formatDate = (isoString) => {
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(isoString).toLocaleDateString(undefined, options);
   };
 
@@ -93,7 +99,9 @@ const TaskDetail = () => {
         </div>
       ))}
 
-      {isPopoverVisible && <PopoverCard task={selectedTask} onClose={closePopover} />}
+      {isPopoverVisible && (
+        <PopoverCard task={selectedTask} onClose={closePopover} />
+      )}
     </>
   );
 };

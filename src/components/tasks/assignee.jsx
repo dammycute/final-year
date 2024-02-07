@@ -11,7 +11,12 @@ const TeamMemberSelect = ({ userId, selectedTeam, onChange }) => {
     const fetchProjectData = async () => {
       try {
         const response = await axios.get(
-          `https://pm-api.cyclic.app/project/${projectId}/team`
+          `https://pm-api.cyclic.app/project/${projectId}/team`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
         );
         const data = response.data;
         console.log("Project Data:", data);

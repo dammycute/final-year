@@ -1,14 +1,12 @@
 import TaskComponent from "./TaskComponent";
 import dateDiffInDays from "../utils/dateDifference";
-import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 const project_duration = "6 weeks";
 const numberOfDays = Number(project_duration.slice(" ")[0]) * 7;
 const duration_array = ["M", "T", "W", "T", "F", "S", "S"];
-
-
 
 // const tasks = [
 //   {
@@ -46,19 +44,25 @@ const TasksTimeline = () => {
   const { projectId } = useParams();
   const [taskData, setTaskData] = useState(null);
 
-  const userId = localStorage.getItem('user_id');
+  const userId = localStorage.getItem("user_id");
 
   useEffect(() => {
     const fetchTaskData = async () => {
       try {
         const response = await axios.get(
-          `https://pm-api.cyclic.app/project/${userId}/projects-and-tasks`
+          `https://pm-api.cyclic.app/project/${userId}/projects-and-tasks`,
+
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
         );
         const data = response.data;
-        console.log('Task Data:', data);
+        console.log("Task Data:", data);
         setTaskData(data);
       } catch (error) {
-        console.error('Error fetching project data:', error);
+        console.error("Error fetching project data:", error);
       }
     };
 
@@ -70,7 +74,7 @@ const TasksTimeline = () => {
   const filteredTasks = tasks.filter((task) => task.projectId === projectId);
 
   const formatDate = (isoString) => {
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const options = { year: "numeric", month: "numeric", day: "numeric" };
     return new Date(isoString).toLocaleDateString(undefined, options);
   };
   return (
@@ -90,8 +94,12 @@ const TasksTimeline = () => {
             return (
               <TaskComponent
                 key={task._id}
-                startdate={`${startDate.getFullYear()}/${startDate.getMonth() + 1}/${startDate.getDate()}`}
-                enddate={`${endDate.getFullYear()}/${endDate.getMonth() + 1}/${endDate.getDate()}`}
+                startdate={`${startDate.getFullYear()}/${
+                  startDate.getMonth() + 1
+                }/${startDate.getDate()}`}
+                enddate={`${endDate.getFullYear()}/${
+                  endDate.getMonth() + 1
+                }/${endDate.getDate()}`}
                 title={task.title}
                 duration={duration}
                 day={`${startDate.getDate()}`}
