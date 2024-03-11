@@ -4,6 +4,35 @@ import jsPDF from "jspdf";
 
 const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
   const invoiceRef = useRef(null);
+  const [taskData, setTaskData] = useState(null);
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("user_id");
+  const { projectId } = useParams();
+
+  useEffect(() => {
+    const fetchTaskData = async () => {
+      try {
+        const response = await axios.post(
+          `https://pm-api.cyclic.app/project/invoices`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+        const data = response.data;
+        // console.log('Taskb Data:', data);
+        setTaskData(data);
+      } catch (error) {
+        console.error("Error fetching project data:", error);
+      }
+    };
+
+    fetchTaskData();
+  }, [userId]);
+
+  const tasks = taskData?.tasks || [];
+  const filteredTasks = tasks.filter((task) => task.projectId === projectId);
 
   const handleDownloadPDF = () => {
     if (!invoiceRef.current) return;
@@ -33,9 +62,9 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
         <div className="container py-3">
           <h1 className="">Invoice</h1>
           <p className="client">
-            Client - <strong>{client}</strong>
+            Client - <strong>{filteredTasks.ownerEmail}</strong>
           </p>
-          <p>Date Period: {datePeriod}</p>
+          <p>Date Period: {filteredTasks.duration}</p>
           <div className="flex justify-between">
             <p>
               Invoice No.: <strong>{invoiceNo}</strong>
@@ -51,9 +80,9 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
           <div className="task-container">
             {tasks.map((task, index) => (
               <div className="task-row flex justify-between my-2" key={index}>
-                <div className="task-description ">{task.task}</div>
+                <div className="task-description ">{task.description}</div>
                 <div className="task-rate">
-                  {task.rate.toLocaleString("en-US", {
+                  {task.cost.toLocaleString("en-US", {
                     style: "currency",
                     currency: "USD",
                   })}
@@ -93,28 +122,16 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
   );
 };
 
-const tasks = [
-  { task: "Site Preparation", rate: 5000 },
-  { task: "Machine Delivery", rate: 2000 },
-  { task: "Mechanical Installation", rate: 8000 },
-  { task: "Electrical Wiring and Configuration", rate: 4000 },
-  { task: "Software Integration", rate: 3000 },
-  { task: "Safety Inspections and Testing", rate: 2500 },
-  { task: "Electrical Wiring and Configuration", rate: 4000 },
-  { task: "Software Integration", rate: 3000 },
-  { task: "Safety Inspections and Testing", rate: 2500 },
-];
-
-export default function App() {
-  return (
-    <div>
-      <Invoice
-        client="Client Name"
-        datePeriod="January 2023"
-        invoiceNo="12345"
-        tasks={tasks}
-        totalDue={tasks.reduce((sum, task) => sum + task.rate, 0)}
-      />
-    </div>
-  );
-}
+// export default function App() {
+//   return (
+//     <div>
+//       <Invoice
+//         client="Client Name"
+//         datePeriod="January 2023"
+//         invoiceNo="12345"
+//         tasks={tasks}
+//         totalDue={tasks.reduce((sum, task) => sum + task.rate, 0)}
+//       />
+//     </div>
+//   );
+// }

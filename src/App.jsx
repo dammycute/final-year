@@ -43,7 +43,7 @@ function App() {
         </Router>
       </Provider>
     );
-  }
+  } else{
 
   return (
     <Provider store={store}>
@@ -82,7 +82,8 @@ function App() {
         </Routes>
       </Router>
     </Provider>
-  );
+    );
+  }
 }
 
 export default App;

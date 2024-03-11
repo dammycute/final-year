@@ -51,16 +51,17 @@ const Login = () => {
     // Send login data to the server (replace with your actual API endpoint)
     try {
       const response = await login(email, password);
-      console.log(response);
+      // console.log(response);
 
       if (response) {
         // const userDetails = await response.json();
-        console.log(response);
+        // console.log(response);
         dispatch(authLogin({ payload: response }));
 
         // Redirect to the dashboard or home page after successful login
 
         navigate("/");
+        // console.log("It is logged already")
       } else {
         setLoginStatus("Login failed. Please check your credentials.");
       }

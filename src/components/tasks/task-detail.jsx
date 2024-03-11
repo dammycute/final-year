@@ -54,6 +54,7 @@ const TaskDetail = () => {
   const handleTaskDetailClick = (selectedTask) => {
     setSelectedTask(selectedTask);
     setPopoverVisible(!isPopoverVisible);
+    console.log(selectedTask._id)
   };
 
   const closePopover = () => {

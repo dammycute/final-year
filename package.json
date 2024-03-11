@@ -24,7 +24,6 @@
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
-    "dom-to-image": "^2.6.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "localforage": "^1.10.0",
@@ -41,9 +40,7 @@
     "react-select": "^5.8.0",
     "sort-by": "^1.2.0",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7",
-    "uuid": "^9.0.1",
-    "zod": "^3.22.4"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",

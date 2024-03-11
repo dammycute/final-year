@@ -36,7 +36,7 @@ const DaysCounter = ({ days, onFinish }) => {
   return (
     <div>
       {endTime !== null ? (
-        <p>{Math.ceil((endTime - new Date().getTime()) / (1000 * 60 * 60 * 24))} Days Remaining</p>
+        <p>{Math.ceil((endTime - new Date().getTime()) / (1000 * 60 * 60 * 24))} Days</p>
       ) : (
         <p>Countdown Finished!</p>
       )}

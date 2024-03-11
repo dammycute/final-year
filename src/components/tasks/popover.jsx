@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PropTypes from "prop-types";
 import avatar from "../../../assets/images/avatar.png";
 import date from "../../../assets/images/calendar.svg";
@@ -11,14 +11,40 @@ import owner from "../../assets/images/owner.png";
 import status from "../../assets/images/status.png";
 import priority from "../../assets/images/priority.png";
 import plus from "../../assets/images/plus.png";
+import Select from "react-select";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Label } from "@/components/ui/label";
 import attach from "../../assets/images/Attach.png";
 
 import CountdownTimer from "../utils/time";
 
 const PopoverCard = ({ task, onClose }) => {
+  const { projectId } = useParams();
+  const navigate = useNavigate()
+  const [normal, setNormal] = useState("default");
+  const [taskStatus, setTaskStatus] = useState("");
+  const token = localStorage.getItem("token");
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Not Started':
+        return 'green'; // Apply green background for 'Not Started'
+      case 'In Progress':
+        return 'rgb(171, 171, 2)'; // Apply yellow background for 'In Progress'
+      case 'In Review':
+        return '#036EFF'; // Apply blue background for 'In Review'
+      case 'Completed':
+        return 'gray'; // Apply gray background for 'Completed'
+      default:
+        return ''; // Default background color
+    }
+  };
+  
+
   const handleFinish = () => {
     console.log('Task completed!');
   };
+
 
   const handleClose = () => {
     onClose();
@@ -28,6 +54,47 @@ const PopoverCard = ({ task, onClose }) => {
   if (!task) {
     return null;
   }
+
+  const [formData, setFormData] = useState({
+    taskId: task._id,
+    status: "",
+  });
+  const handleStatusChange = async (selectedOption) => {
+    const newStatus = selectedOption.value;
+
+    try {
+      const formDataToSubmit = {
+        taskId: task._id,
+        status: newStatus,
+      };
+
+      const response = await axios.patch(
+        `https://pm-api.cyclic.app/project/${projectId}/task`,
+        formDataToSubmit,
+        {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status === 200 || 201) {
+        // Update the task status in the local state or Redux store if needed
+        // Optionally, you can also close the popover here if the update is successful
+        setTaskStatus("Task Successfully Updated");
+        // navigate(`/projects`)
+        window.location.reload(false)
+      } else {
+        setTaskStatus("Failed to update task");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      if (error.response && error.response.data && error.response.data.error) {
+        setTaskStatus(error.response.data.error);
+      }
+    }
+  };
 
   const formatDate = (isoString) => {
     const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
@@ -47,14 +114,14 @@ const PopoverCard = ({ task, onClose }) => {
           </div>
           <div className="flex title justify-between items-center py-4">
             <h1 className="">{task.title}</h1>
-            <div className="time badged1">
+            {/* <div className="time badged1">
               <img src={clock} alt="" />
               <CountdownTimer
                 className="px-4"
                 initialHours={2}
                 onFinish={handleFinish}
               />
-            </div>
+            </div> */}
           </div>
           <div className="desc-ctn">
             <div className="assign">
@@ -73,11 +140,45 @@ const PopoverCard = ({ task, onClose }) => {
                 <img src={status} alt="" />
                 <span>Status</span>
               </div>
-              <div className="right green">
-                <button className="green">{task.status}</button>
+              <div className="right">
+                <button style={{ backgroundColor: getStatusColor(task.status) }}>{task.status}</button>
               </div>
             </div>
           </div>
+
+          <div className="select flex gap-6 items-center mt-6">
+            <Label>Change Task Status</Label>
+            <Select
+              className="mt-2 w-[150px] bg-[blue] "
+              value={{ value: formData.status, label: formData.status }}
+              onChange={handleStatusChange}
+              defaultInputValue='Not Started'
+              options={[
+                { value: "Not Started", label: "Not Started" },
+                { value: "In Progress", label: "In Progress" },
+                { value: "In Review", label: "In Review" },
+                { value: "Completed", label: "Completed" },
+              ]}
+              styles={{
+                menu: (provided) => ({
+                  ...provided,
+                  top: "auto",
+                  bottom: "100%",
+                }),
+                menuList: (provided) => ({
+                  ...provided,
+                  maxHeight: "150px", // Adjust the max height as needed
+                  overflowY: "auto",
+                }),
+              }}
+            />
+          </div>
+          {taskStatus && (
+            <Alert variant={normal}>
+              <AlertTitle>Status:</AlertTitle>
+              <AlertDescription>{taskStatus}</AlertDescription>
+            </Alert>
+          )}
 
           <div className="desc-ctn">
             <div className="assign">
@@ -142,9 +243,9 @@ const PopoverCard = ({ task, onClose }) => {
           <div className="popover-footer">
             <img src={avatar} alt="" />
             <p>Add Attachment</p>
+          </div>
         </div>
-        </div>
-        
+
       </div>
     </div>
   );
