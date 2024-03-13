@@ -95,7 +95,7 @@ const TaskTab = () => {
             <Link to={`/projects/${projectId}/tasks/create-task`}>Add Task</Link>
           </Button>
           <Button className="bg-[#036EFF]  px-4 text-md">
-            <Link to="/invoice">Print Invoice</Link>
+            <Link to={`/projects/${projectId}/tasks/invoice`}>Print Invoice</Link>
           </Button>
         </div>
       </div>

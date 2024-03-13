@@ -128,5 +128,5 @@ const TableColumn = () => {
     </div>
   ));
 
-  return <div className="flex flex-wrap">{column}</div>;
+  return <div className="flex flex-nowrap">{column}</div>;
 };

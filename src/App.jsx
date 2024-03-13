@@ -26,6 +26,7 @@ import PasswordSetting from "./components/settings/PasswordSetting.jsx";
 import Notification from "./components/settings/Notification.jsx";
 import ProjectLayout from "./components/projects/ProjectLayout.jsx";
 import ProtectedRoute from "./components/utils/protect.jsx";
+import Invoice from "./components/tasks/invoice.jsx";
 
 function App() {
 
@@ -43,29 +44,29 @@ function App() {
         </Router>
       </Provider>
     );
-  } else{
+  } else {
 
-  return (
-    <Provider store={store}>
-      <Router>
-        <Routes>
-          {/* <Route exact path="/register" element={<Register />} /> */}
-          <Route exact path="/activate" element={<Activation />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/set-password" element={<SetPassword />} />
-          <Route exact path="/set-new-password" element={<SetPassword />} />
-          {/* <Route exact path="/set-password" element={<Recov} />  */}
-          <Route exact path="/recover-password" element={<RecoverEmail />} />
-          <Route exact path="/recover-password-otp" element={<RecoverCode />} />
+    return (
+      <Provider store={store}>
+        <Router>
+          <Routes>
+            {/* <Route exact path="/register" element={<Register />} /> */}
+            <Route exact path="/activate" element={<Activation />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/set-password" element={<SetPassword />} />
+            <Route exact path="/set-new-password" element={<SetPassword />} />
+            {/* <Route exact path="/set-password" element={<Recov} />  */}
+            <Route exact path="/recover-password" element={<RecoverEmail />} />
+            <Route exact path="/recover-password-otp" element={<RecoverCode />} />
 
-          <Route exact path="/" element={<DashboardLayout />}>
-            <Route index element={<Dashboard />} />
+            <Route exact path="/" element={<DashboardLayout />}>
+              <Route index element={<Dashboard />} />
 
-            <Route exact path="settings" element={<SettingsLayout />}>
-              <Route index element={<GeneralSettings />} />
-              <Route path="password" element={<PasswordSetting />} />
-              <Route path="notification" element={<Notification />} />
-            </Route>
+              <Route exact path="settings" element={<SettingsLayout />}>
+                <Route index element={<GeneralSettings />} />
+                <Route path="password" element={<PasswordSetting />} />
+                <Route path="notification" element={<Notification />} />
+              </Route>
 
               <Route exact path="projects" element={<ProjectLayout />}>
                 <Route index element={<ProjectList />} />
@@ -73,15 +74,16 @@ function App() {
                 <Route exact path=":projectId/tasks">
                   <Route index element={<TaskPage />} />
                   <Route path="create-task" element={<CreateTask />} />
+                  <Route path="invoice" element={<Invoice />} />
                 </Route>
               </Route>
 
               {/* <Route exact path="/task-" element={<TaskList/>} /> */}
             </Route>
-          {/* </ProtectedRoute> */}
-        </Routes>
-      </Router>
-    </Provider>
+            {/* </ProtectedRoute> */}
+          </Routes>
+        </Router>
+      </Provider>
     );
   }
 }

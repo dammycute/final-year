@@ -1,19 +1,27 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
+const Invoice = ({ client, datePeriod, invoiceNo, totalDue }) => {
   const invoiceRef = useRef(null);
   const [taskData, setTaskData] = useState(null);
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("user_id");
   const { projectId } = useParams();
+  const [formData, setFormData] = useState({
+    projectId: projectId
+  })
+
+  
 
   useEffect(() => {
     const fetchTaskData = async () => {
       try {
         const response = await axios.post(
           `https://pm-api.cyclic.app/project/invoices`,
+          formData,
           {
             headers: {
               Authorization: token,
@@ -21,7 +29,7 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
           }
         );
         const data = response.data;
-        // console.log('Taskb Data:', data);
+        console.log('Invoice Data:', data);
         setTaskData(data);
       } catch (error) {
         console.error("Error fetching project data:", error);
@@ -33,7 +41,7 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
 
   const tasks = taskData?.tasks || [];
   const filteredTasks = tasks.filter((task) => task.projectId === projectId);
-
+  // totalDue={tasks.reduce((sum, task) => sum + task.rate, 0)}
   const handleDownloadPDF = () => {
     if (!invoiceRef.current) return;
 
@@ -58,8 +66,11 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
 
   return (
     <>
-      <div className="invoice h-[500px] overflow-auto" ref={invoiceRef}>
-        <div className="container py-3">
+      <button className="bg-[#036EFF] text-white rounded-lg px-12 max-w-full my-5 py-2" onClick={handleDownloadPDF}>Download PDF</button>
+
+      <div className="invoice h-full " ref={invoiceRef}>
+        <div className="min-h-[300px] overflow-y-scroll">
+        <div className="container  py-3">
           <h1 className="">Invoice</h1>
           <p className="client">
             Client - <strong>{filteredTasks.ownerEmail}</strong>
@@ -82,10 +93,10 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
               <div className="task-row flex justify-between my-2" key={index}>
                 <div className="task-description ">{task.description}</div>
                 <div className="task-rate">
-                  {task.cost.toLocaleString("en-US", {
+                  {task.estimatedCosts ? task.estimatedCosts.otherExpenses.toLocaleString("en-US", {
                     style: "currency",
-                    currency: "USD",
-                  })}
+                    currency: "NGN",
+                  }) : 'N/A'}
                 </div>
               </div>
             ))}
@@ -100,15 +111,15 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
             </div>
 
             <div className="bord flex justify-between">
-                <div className="before"></div>
+              <div className="before"></div>
               <div className="money">
                 <p className="large">
                   {" "}
                   <strong>
-                    {totalDue.toLocaleString("en-US", {
+                    {/* {totalDue.toLocaleString("en-US", {
                       style: "currency",
                       currency: "USD",
-                    })}
+                    })} */}
                   </strong>
                 </p>
                 <p className="small">Total payment due in 30 days.</p>
@@ -116,11 +127,14 @@ const Invoice = ({ client, datePeriod, invoiceNo, tasks, totalDue }) => {
             </div>
           </div>
         </div>
+        </div>
       </div>
-      <button className="bg-[#036EFF] text-white rounded-lg px-12 max-w-full my-5 py-2" onClick={handleDownloadPDF}>Download PDF</button>
+      
     </>
   );
 };
+
+export default Invoice
 
 // export default function App() {
 //   return (
