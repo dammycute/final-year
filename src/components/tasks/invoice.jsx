@@ -4,7 +4,7 @@ import jsPDF from "jspdf";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const Invoice = ({ client, datePeriod, invoiceNo, totalDue }) => {
+const Invoice = () => {
   const invoiceRef = useRef(null);
   const [taskData, setTaskData] = useState(null);
   const token = localStorage.getItem("token");
@@ -14,7 +14,7 @@ const Invoice = ({ client, datePeriod, invoiceNo, totalDue }) => {
     projectId: projectId
   })
 
-  
+
 
   useEffect(() => {
     const fetchTaskData = async () => {
@@ -29,7 +29,7 @@ const Invoice = ({ client, datePeriod, invoiceNo, totalDue }) => {
           }
         );
         const data = response.data;
-        console.log('Invoice Data:', data);
+        // console.log('Invoice Data:', data);
         setTaskData(data);
       } catch (error) {
         console.error("Error fetching project data:", error);
@@ -40,8 +40,11 @@ const Invoice = ({ client, datePeriod, invoiceNo, totalDue }) => {
   }, [userId]);
 
   const tasks = taskData?.tasks || [];
-  const filteredTasks = tasks.filter((task) => task.projectId === projectId);
-  // totalDue={tasks.reduce((sum, task) => sum + task.rate, 0)}
+  const projects = taskData?.project || []
+  const pro = new Array(projects)
+  // console.log(projects)
+  // const filteredTasks = tasks.filter((task) => task.projectId === projectId);
+  const totalDue=tasks.reduce((sum, task) => sum + task.estimatedCosts.otherExpenses, 0)
   const handleDownloadPDF = () => {
     if (!invoiceRef.current) return;
 
@@ -64,72 +67,83 @@ const Invoice = ({ client, datePeriod, invoiceNo, totalDue }) => {
     });
   };
 
+  const formatDate = (isoString) => {
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    return new Date(isoString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <>
       <button className="bg-[#036EFF] text-white rounded-lg px-12 max-w-full my-5 py-2" onClick={handleDownloadPDF}>Download PDF</button>
 
       <div className="invoice h-full " ref={invoiceRef}>
         <div className="min-h-[300px] overflow-y-scroll">
-        <div className="container  py-3">
-          <h1 className="">Invoice</h1>
-          <p className="client">
-            Client - <strong>{filteredTasks.ownerEmail}</strong>
-          </p>
-          <p>Date Period: {filteredTasks.duration}</p>
-          <div className="flex justify-between">
-            <p>
-              Invoice No.: <strong>{invoiceNo}</strong>
-            </p>
-            <p>Installation of Lathe Machine</p>
-          </div>
 
-          <div className="flex font-bold justify-between my-6">
-            <h2>Description</h2>
-            <h2>Rate (Monthly)</h2>
-          </div>
-
-          <div className="task-container">
-            {tasks.map((task, index) => (
-              <div className="task-row flex justify-between my-2" key={index}>
-                <div className="task-description ">{task.description}</div>
-                <div className="task-rate">
-                  {task.estimatedCosts ? task.estimatedCosts.otherExpenses.toLocaleString("en-US", {
-                    style: "currency",
-                    currency: "NGN",
-                  }) : 'N/A'}
+          <div className="container  py-3">
+            <h1 className="">Invoice</h1>
+            {pro.map((project, index) => (
+              <div key={index}>
+                <p className="client">
+                  Client - <strong>{project.employer}</strong>
+                </p>
+                <p>Date Period: {formatDate(project.startDate)}</p>
+                <div className="flex justify-between">
+                  <p>
+                    Invoice No.: <strong>{project._id}</strong>
+                  </p>
+                  <h1>{project.title}</h1>
                 </div>
               </div>
             ))}
-          </div>
-        </div>
 
-        <div className="color">
-          <div className="container">
-            <div className="invoice-footer flex justify-between">
-              <strong>Additional Information</strong>
-              <strong>Total Due:</strong>
+
+            <div className="flex font-bold justify-between my-6">
+              <h2>Description</h2>
+              <h2>Rate (Monthly)</h2>
             </div>
 
-            <div className="bord flex justify-between">
-              <div className="before"></div>
-              <div className="money">
-                <p className="large">
-                  {" "}
-                  <strong>
-                    {/* {totalDue.toLocaleString("en-US", {
+            <div className="task-container">
+              {tasks.map((task, index) => (
+                <div className="task-row flex justify-between my-2" key={index}>
+                  <p className="task-description ">{task.description}</p>
+                  <p className="task-rate">
+                    {task.estimatedCosts ? task.estimatedCosts.otherExpenses.toLocaleString("en-US", {
                       style: "currency",
-                      currency: "USD",
-                    })} */}
-                  </strong>
-                </p>
-                <p className="small">Total payment due in 30 days.</p>
+                      currency: "NGN",
+                    }) : 'N/A'}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="color">
+            <div className="container">
+              <div className="invoice-footer flex justify-between">
+                <strong>Additional Information</strong>
+                <strong>Total Due:</strong>
+              </div>
+
+              <div className="bord flex justify-between">
+                <div className="before"></div>
+                <div className="money">
+                  <p className="large">
+                    {" "}
+                    <strong>
+                      {totalDue.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "NGN",
+                    })}
+                    </strong>
+                  </p>
+                  <p className="small">Total payment due in 30 days.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
       </div>
-      
+
     </>
   );
 };

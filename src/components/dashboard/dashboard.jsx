@@ -24,7 +24,7 @@ function DashboardLayout() {
           }
         );
         const data = response.data;
-        console.log("Task Data:", data);
+        // console.log("Task Data:", data);
         setTaskData(data);
       } catch (error) {
         console.error("Error fetching project data:", error);
@@ -37,7 +37,7 @@ function DashboardLayout() {
   const tasks = taskData?.tasks.length;
   const projects = taskData?.projects.length;
 
-  console.log(tasks, projects)
+  // console.log(tasks, projects)
 
 
 

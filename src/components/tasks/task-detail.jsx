@@ -32,7 +32,7 @@ const TaskDetail = () => {
           }
         );
         const data = response.data;
-        console.log("Task Data:", data);
+        // console.log("Task Data:", data);
         setTaskData(data);
       } catch (error) {
         console.error("Error fetching project data:", error);
@@ -46,15 +46,10 @@ const TaskDetail = () => {
 
   const filteredTasks = tasks.filter((task) => task.projectId === projectId);
 
-  const formatDate = (isoString) => {
-    const options = { year: "numeric", month: "numeric", day: "numeric" };
-    return new Date(isoString).toLocaleDateString(undefined, options);
-  };
-
   const handleTaskDetailClick = (selectedTask) => {
     setSelectedTask(selectedTask);
     setPopoverVisible(!isPopoverVisible);
-    console.log(selectedTask._id)
+    // console.log(selectedTask._id)
   };
 
   const closePopover = () => {

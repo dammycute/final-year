@@ -50,7 +50,7 @@ function App() {
       <Provider store={store}>
         <Router>
           <Routes>
-            {/* <Route exact path="/register" element={<Register />} /> */}
+            <Route exact path="/register" element={<Register />} />
             <Route exact path="/activate" element={<Activation />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/set-password" element={<SetPassword />} />

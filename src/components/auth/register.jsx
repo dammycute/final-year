@@ -99,7 +99,7 @@ const validateForm = () => {
 
         return redirect('/activation');
         setRegistrationStatus("Registration Successful");
-        console.log(formData);
+        // console.log(formData);
       } else {
         const errorData = await response.json();
         setRegistrationStatus(errorData.message);

@@ -21,7 +21,7 @@
 }
 
 .invoice p{
-  font-size: 16px;
+  font-size: 20px;
 }
 
 .invoice{
@@ -32,6 +32,10 @@
 .invoice-footer, .bord{
   border-bottom: 1px solid black;
   padding-bottom: 1rem;
+}
+
+.task-row p{
+  font-size: 18px;
 }
 
 .color{
@@ -53,7 +57,7 @@
 }
 
 .money .small{
-  font-size: 14px;
+  font-size: 16px;
 
 }
 

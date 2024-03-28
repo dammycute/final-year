@@ -22,7 +22,7 @@ const GeneralSettings = () => {
           }
         );
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setUserData(data);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -30,7 +30,7 @@ const GeneralSettings = () => {
     };
 
     const user = localStorage.getItem("userId");
-    console.log(user);
+    // console.log(user);
 
     fetchUserData();
   }, [userId]);

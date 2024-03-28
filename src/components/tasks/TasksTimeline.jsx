@@ -59,7 +59,7 @@ const TasksTimeline = () => {
           }
         );
         const data = response.data;
-        console.log("Task Data:", data);
+        // console.log("Task Data:", data);
         setTaskData(data);
       } catch (error) {
         console.error("Error fetching project data:", error);

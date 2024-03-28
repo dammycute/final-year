@@ -31,7 +31,7 @@ const CommonComponent = () => {
           }
         );
         const data = response.data;
-        console.log("Project Data:", data);
+        // console.log("Project Data:", data);
         setProjectData(data);
       } catch (error) {
         console.error("Error fetching project data:", error);
